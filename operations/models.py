@@ -17,11 +17,7 @@ class Vessel(models.Model):
     capacity_tons = models.FloatField()
     fuel_capacity_tons = models.FloatField()
 
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default="active"
-    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="active")
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -38,11 +34,7 @@ class Voyage(models.Model):
         ("cancelled", "Cancelled"),
     ]
 
-    vessel = models.ForeignKey(
-        Vessel,
-        on_delete=models.CASCADE,
-        related_name="voyages"
-    )
+    vessel = models.ForeignKey(Vessel, on_delete=models.CASCADE, related_name="voyages")
 
     departure_port = models.CharField(max_length=100)
     destination_port = models.CharField(max_length=100)
@@ -53,11 +45,7 @@ class Voyage(models.Model):
 
     distance_nm = models.FloatField()
 
-    status = models.CharField(
-        max_length=20,
-        choices=STATUS_CHOICES,
-        default="planned"
-    )
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="planned")
 
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -67,9 +55,7 @@ class Voyage(models.Model):
 
 class TelemetryRecord(models.Model):
     voyage = models.ForeignKey(
-        Voyage,
-        on_delete=models.CASCADE,
-        related_name="telemetry_records"
+        Voyage, on_delete=models.CASCADE, related_name="telemetry_records"
     )
 
     timestamp = models.DateTimeField()
@@ -101,7 +87,6 @@ class OperationalAlert(models.Model):
         ("route_deviation", "Route Deviation"),
         ("speed_anomaly", "Speed Anomaly"),
     ]
-
     SEVERITY_CHOICES = [
         (1, "Info"),
         (2, "Low"),
@@ -109,35 +94,18 @@ class OperationalAlert(models.Model):
         (4, "High"),
         (5, "Critical"),
     ]
-
-    voyage = models.ForeignKey(
-        Voyage,
-        on_delete=models.CASCADE,
-        related_name="alerts"
-    )
-
+    voyage = models.ForeignKey(Voyage, on_delete=models.CASCADE, related_name="alerts")
     telemetry_record = models.ForeignKey(
         TelemetryRecord,
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        related_name="alerts"
+        related_name="alerts",
     )
-
-    alert_type = models.CharField(
-        max_length=50,
-        choices=ALERT_TYPES
-    )
-
-    severity = models.IntegerField(
-        choices=SEVERITY_CHOICES,
-        default=3
-    )
-
+    alert_type = models.CharField(max_length=50, choices=ALERT_TYPES)
+    severity = models.IntegerField(choices=SEVERITY_CHOICES, default=3)
     message = models.TextField()
-
     resolved = models.BooleanField(default=False)
-
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
