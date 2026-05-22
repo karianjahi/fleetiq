@@ -77,28 +77,23 @@ class OperationalAlert(models.Model):
     ALERT_TYPES = [
         ("delay_risk", "Delay Risk"),
         ("fuel_anomaly", "Fuel Anomaly"),
+        ("engine_overheat", "Engine Overheat"),
         ("weather_warning", "Weather Warning"),
-        ("engine_issue", "Engine Issue"),
+        ("route_deviation", "Route Deviation"),
+        ("speed_anomaly", "Speed Anomaly"),
     ]
+    voyage = models.ForeignKey(Voyage, on_delete=models.CASCADE, related_name="alerts")
 
-    voyage = models.ForeignKey(
-        Voyage,
-        on_delete=models.CASCADE,
-        related_name="alerts"
+    telemetry_record = models.ForeignKey(
+        TelemetryRecord,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="alerts",
     )
 
-    alert_type = models.CharField(
-        max_length=50,
-        choices=ALERT_TYPES
-    )
-
+    alert_type = models.CharField(max_length=50)
     severity = models.IntegerField(default=1)
-
     message = models.TextField()
-
     resolved = models.BooleanField(default=False)
-
     created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.alert_type} - {self.voyage.vessel.name}"
