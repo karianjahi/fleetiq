@@ -1,6 +1,6 @@
 from operations.models import OperationalAlert
 
-def generate_alerst_for_telemetry(record):
+def generate_alerts_for_telemetry(record):
     """
     Analyse one telemetry record and create operational alerts
     when defined thresholds are exceeded.
