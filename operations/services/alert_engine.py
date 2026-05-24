@@ -7,7 +7,7 @@ def generate_alerts_for_telemetry(record):
     """
     alerts = []
     
-   # 1. Engine overheat
+    # 1. Engine overheat
     if record.engine_temperature_celsius >= 95:
         alerts.append(
             OperationalAlert.objects.create(
