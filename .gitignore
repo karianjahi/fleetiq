@@ -216,3 +216,5 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+operations/management/commands/randomized_database_records.py
+operations/services/create_alerts.py
