@@ -1,0 +1,51 @@
+name,imo_number,vessel_type,capacity_tons,fuel_capacity_tons,status
+MV Ocean Pioneer,IMO1000001,Bulk Carrier,75000,3500,active
+MV Atlantic Horizon,IMO1000002,Container Ship,68000,3200,active
+MV Blue Voyager,IMO1000003,Tanker,82000,4100,maintenance
+MV Sea Titan,IMO1000004,Bulk Carrier,71000,3400,active
+MV Pacific Crown,IMO1000005,Container Ship,66000,3100,active
+MV Northern Crest,IMO1000006,Tanker,89000,4300,inactive
+MV Coral Dynasty,IMO1000007,Bulk Carrier,73000,3600,active
+MV Neptune Star,IMO1000008,Container Ship,69000,3150,active
+MV Ocean Monarch,IMO1000009,Tanker,91000,4500,maintenance
+MV Horizon Queen,IMO1000010,Bulk Carrier,76000,3550,active
+MV Emerald Tide,IMO1000011,Container Ship,64000,3000,active
+MV Silver Mariner,IMO1000012,Tanker,85000,4200,active
+MV Crimson Wave,IMO1000013,Bulk Carrier,78000,3650,maintenance
+MV Golden Harbor,IMO1000014,Container Ship,67000,3250,active
+MV Polar Navigator,IMO1000015,Tanker,92000,4600,active
+MV Azure Falcon,IMO1000016,Bulk Carrier,74000,3500,active
+MV Titan Voyager,IMO1000017,Container Ship,65000,3050,inactive
+MV Sapphire Ocean,IMO1000018,Tanker,87000,4350,active
+MV Arctic Pioneer,IMO1000019,Bulk Carrier,72000,3450,active
+MV Liberty Seas,IMO1000020,Container Ship,70000,3300,maintenance
+MV Ocean Sentinel,IMO1000021,Tanker,93000,4700,active
+MV Coastal Spirit,IMO1000022,Bulk Carrier,77000,3600,active
+MV Blue Dynasty,IMO1000023,Container Ship,66000,3120,active
+MV Neptune Voyager,IMO1000024,Tanker,84000,4150,maintenance
+MV Atlantic Titan,IMO1000025,Bulk Carrier,79000,3750,active
+MV Horizon Star,IMO1000026,Container Ship,63000,2980,active
+MV Pacific Guardian,IMO1000027,Tanker,90000,4450,inactive
+MV Ocean Falcon,IMO1000028,Bulk Carrier,73500,3480,active
+MV Coral Horizon,IMO1000029,Container Ship,68500,3200,active
+MV Maritime Crown,IMO1000030,Tanker,86000,4250,active
+MV Silver Horizon,IMO1000031,Bulk Carrier,75500,3520,maintenance
+MV Titan Ocean,IMO1000032,Container Ship,67500,3180,active
+MV Northern Voyager,IMO1000033,Tanker,94000,4800,active
+MV Emerald Navigator,IMO1000034,Bulk Carrier,76500,3580,active
+MV Golden Tide,IMO1000035,Container Ship,65500,3070,active
+MV Polar Dynasty,IMO1000036,Tanker,88000,4380,maintenance
+MV Liberty Voyager,IMO1000037,Bulk Carrier,74500,3490,active
+MV Ocean Spirit,IMO1000038,Container Ship,69500,3280,active
+MV Neptune Crown,IMO1000039,Tanker,91500,4550,active
+MV Atlantic Guardian,IMO1000040,Bulk Carrier,78500,3720,inactive
+MV Sapphire Mariner,IMO1000041,Container Ship,64500,3020,active
+MV Crimson Voyager,IMO1000042,Tanker,89500,4420,active
+MV Arctic Horizon,IMO1000043,Bulk Carrier,77500,3670,maintenance
+MV Blue Sentinel,IMO1000044,Container Ship,66500,3140,active
+MV Coastal Falcon,IMO1000045,Tanker,90500,4480,active
+MV Maritime Pioneer,IMO1000046,Bulk Carrier,72500,3430,active
+MV Ocean Dynasty,IMO1000047,Container Ship,70500,3320,active
+MV Pacific Voyager,IMO1000048,Tanker,92500,4650,maintenance
+MV Horizon Guardian,IMO1000049,Bulk Carrier,79500,3780,active
+MV Emerald Crown,IMO1000050,Container Ship,67500,3190,active
