@@ -15,6 +15,7 @@ class Vessel(models.Model):
     vessel_type = models.CharField(max_length=100)
 
     capacity_tons = models.FloatField()
+    capacity_tons = models.FloatField()
     fuel_capacity_tons = models.FloatField()
 
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="active")

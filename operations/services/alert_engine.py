@@ -70,3 +70,4 @@ def generate_alerts_for_telemetry(record):
                 ),
             )
         )
+    return alerts
