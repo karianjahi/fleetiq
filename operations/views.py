@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.db.models import Count
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -31,5 +32,38 @@ def latest_alerts(request):
     serializer = OperationalAlertSerializer(alerts, many=True)
     return Response(serializer.data)
 
-def dashboard(request):
+@api_view(["GET"])
+def alert_summary_by_type(request):
+    data = (
+        OperationalAlert.objects
+        .values("alert_type")
+        .annotate(count=Count("id"))
+        .order_by("alert_type")
+    )
+    return Response(list(data))
+
+
+@api_view(["GET"])
+def alert_count_by_severity(request):
+    data = (
+        OperationalAlert.objects
+        .values()
+        .annotate(count=Count("id"))
+        .order_by("severity")
+    )
+    return Response(list(data))
+
+
+@api_view(["GET"])
+def voyage_status_summary(request):
+    data = (
+        Voyage.objects
+        .values("status")
+        .annotate(count=Count("id"))
+        .order_by("status")
+    )
+    return Response(list(data))
+
+def dashboard_view(request):
     return render(request, "operations/dashboard.html")
+
