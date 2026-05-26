@@ -30,3 +30,6 @@ def latest_alerts(request):
     ).order_by("-created_at")[:10]
     serializer = OperationalAlertSerializer(alerts, many=True)
     return Response(serializer.data)
+
+def dashboard(request):
+    return render(request, "operations/dashboard.html")
