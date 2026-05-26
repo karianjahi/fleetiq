@@ -218,3 +218,4 @@ __marimo__/
 .streamlit/secrets.toml
 operations/management/commands/randomized_database_records.py
 operations/services/create_alerts.py
+.fuse_hidden0000775d00000008
