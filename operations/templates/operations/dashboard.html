@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'operations/css/dashboard.css' %}">
+    <title>Fleet IQ</title>
+</head>
+<body>
+    <main>
+        <header>
+            <h1>
+                Fleet IQ: An overview of shippers from the Karaboa regions
+            </h1>
+        </header>
+        <div class="summary">
+            <div class="card">
+                <p>Total Vessels</p>
+                <p id="total-vessels"></p>
+            </div>
+            <div class="card">
+                <p>Active Vessels</p>
+                <p id="active-vessels"></p>
+            </div>
+            <div class="card">
+                <p>Total Voyages</p>
+                <p id="total-voyages"></p>
+            </div>
+            <div class="card">
+                <p>Ongoing Voyages</p>
+                <p id="ongoing-voyages"></p>
+            </div>
+            <div class="card">
+                <p>Time Data Records</p>
+                <p id="telemetry-records"></p>
+            </div>
+            <div class="card">
+                <p>Total Alerts</p>
+                <p id="total-alerts"></p>
+            </div>
+            <div class="card">
+                <p>Critical Alerts</p>
+                <p id="critical-alerts"></p>
+            </div>
+            <div class="card">
+                <p>Unresolved Alerts</p>
+                <p id="unresolved-alerts"></p>
+            </div>
+
+        </div>
+    </main>
+    <script src="{% static 'operations/js/dashboard.js' %}"></script>
+</body>
+</html>
