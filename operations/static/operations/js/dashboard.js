@@ -1,43 +1,45 @@
-const totalVesselsEl = document.getElementById("total-vessels");
-const activeVesselsEl = document.getElementById("active-vessels");
-const totalVoyagesEl = document.getElementById("total-voyages");
-const telemetryRecordsEl = document.getElementById("telemetry-records");
-const totalAlertsEl = document.getElementById("total-alerts");
-const criticalAlertsEl = document.getElementById("critical-alerts");
-const unresolvedAlerts = document.getElementById("unresolved-alerts");
-const ongoingVoyagesEl = document.getElementById("ongoing-voyages");
-const delayRiskFreqEl = document.getElementById("delay-risk-freq");
-const engineOverheatFreqEl = document.getElementById("engine-overheat-freq");
-const fuelAnomalyFreqEl = document.getElementById("fuel-anomaly-freq");
-const weatherWarningFreqEl = document.getElementById("weather-warning-freq");
+document.addEventListener("DOMContentLoaded", () => {
+    loadKPIs();
+    loadAlertsTable();
+});
 
-getSummaryKPIs();
 
-function getSummaryKPIs() {
-    urlKpis = '/api/dashboard/kpis/';
-    urlSummaries = '/api/kpisummary/'
-    fetch(urlKpis)
-        .then(response => response.json())
-        .then(data =>{
-            totalVesselsEl.textContent = data.total_vessels;
-            activeVesselsEl.textContent = data.active_vessels;
-            totalVoyagesEl.textContent = data.total_voyages;
-            ongoingVoyagesEl.textContent = data.ongoing_voyages;
-            telemetryRecordsEl.textContent = data.telemetry_records;
-            totalAlertsEl.textContent = data.total_alerts;
-            criticalAlertsEl.textContent = data.critical_alerts;
-            unresolvedAlerts.textContent = data.unresolved_alerts;
-        })
-    
-    fetch(urlSummaries)
-        .then(response => response.json())
-        .then(data => {
-            for (const item of data){
-                if (item.alert_type === "delay_risk") delayRiskFreqEl.textContent = item.count;
-                if (item.alert_type === "engine_overheat") engineOverheatFreqEl.textContent = item.count;
-                if (item.alert_type === "fuel_anomaly") fuelAnomalyFreqEl.textContent = item.count;
-                if (item.alert_type === "weather_warning") weatherWarningFreqEl.textContent = item.count;
-            }
-        })
-        
+async function loadKPIs() {
+    const response = await fetch("/api/dashboard/kpis/");
+    const data = await response.json();
+
+    document.getElementById("total-vessels").textContent = data.total_vessels;
+    document.getElementById("active-vessels").textContent = data.active_vessels;
+    document.getElementById("total-voyages").textContent = data.total_voyages;
+    document.getElementById("total-alerts").textContent = data.total_alerts;
+    document.getElementById("critical-alerts").textContent = data.critical_alerts;
+    document.getElementById("unresolved-alerts").textContent = data.unresolved_alerts;
 }
+
+
+async function loadAlertsTable() {
+    try {
+        const response = await fetch("/api/alerts/latest/");
+        if (!response.ok) {
+            throw new Error("Failed to fetch KPI data");
+        }
+        const data = await response.json();
+        const tableBodyEl = document.getElementById("latest-alerts-table");
+        let htmlTable = "";
+        for (const item of data) {
+            htmlTable += 
+            `<tr> 
+                <td>${item.vessel_name}</td> 
+                <td>${item.alert_type_display}</td> 
+                <td>${item.severity_display}</td> 
+                <td>${item.message}</td> 
+                <td>${new Date(item.created_at).toLocaleString()}</td> 
+            </tr>`;
+        }
+        tableBodyEl.innerHTML = htmlTable;
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+
