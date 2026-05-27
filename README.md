@@ -425,7 +425,7 @@ FleetIQ is intentionally being developed as:
 
 # 👨‍💻 Author
 
-## Joseph Karianjahi Njeri
+## Dr.rer.nat Joseph Karianjahi Njeri
 
 - Data Science
 - Full-Stack Development
