@@ -97,4 +97,4 @@ class Command(BaseCommand):
                 self.stdout.write(
                     self.style.SUCCESS("Demo data and alerts generated successfully.")
                 )
-                print(f"Wrote {TELEMETRY_RECORDS} Telemetry records for vessel {vessel.name} moving from {voyage.departure_port} to {voyage.destination_port}")
+                # print(f"Wrote {TELEMETRY_RECORDS} Telemetry records for vessel {vessel.name} moving from {voyage.departure_port} to {voyage.destination_port}")
