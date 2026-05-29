@@ -1,5 +1,4 @@
 # operations/management/commands/generate_demo_data.py
-from tqdm import tqdm
 from datetime import timedelta
 import random
 
@@ -66,7 +65,7 @@ class Command(BaseCommand):
                 status=row["status"],
             )
             n_voyages = random.choice(VOYAGES)
-            for i in tqdm(range(n_voyages)):
+            for i in range(n_voyages):
                 departure_port = random.choice(PORTS)
                 destination_port = random.choice([port for port in PORTS if port != departure_port])
                 voyage = Voyage.objects.create(
