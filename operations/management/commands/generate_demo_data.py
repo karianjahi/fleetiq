@@ -1,8 +1,9 @@
 # operations/management/commands/generate_demo_data.py
+
 from datetime import timedelta
 import random
-
 from pathlib import Path
+
 import pandas as pd
 
 from django.core.management.base import BaseCommand
@@ -12,7 +13,9 @@ from django.conf import settings
 from operations.models import Vessel, Voyage, TelemetryRecord
 from operations.services.alert_engine import generate_alerts_for_telemetry
 
-FILEPATH = Path(settings.BASE_DIR)  # The root path of the directory
+
+FILEPATH = Path(settings.BASE_DIR)
+
 PORTS = [
     "Mombasa",
     "Rotterdam",
@@ -25,15 +28,9 @@ PORTS = [
     "Hong Kong",
     "New York",
 ]
-DISTANCES = [
-    18201,
-    9842,
-    12499,
-    19422,
-    7921,
-    11941,
-    5619,
-]
+
+DISTANCES = [18201, 9842, 12499, 19422, 7921, 11941, 5619]
+
 STATUS_CHOICES = [
     "planned",
     "ongoing",
@@ -45,16 +42,19 @@ STATUS_CHOICES = [
 VOYAGES = [3, 2, 5, 6, 1]
 TELEMETRY_RECORDS = 48
 
+
 class Command(BaseCommand):
     help = "Generate demo vessels, voyages, telemetry records, and alerts."
 
     def handle(self, *args, **kwargs):
         vessel_df = pd.read_csv(
-            f"{FILEPATH}/operations/management/commands/vessels.csv"
+            FILEPATH / "operations" / "management" / "commands" / "vessels.csv"
         )
-        subdf = vessel_df.sample(frac=1)[:5]
+
+        subdf = vessel_df.sample(frac=1).head(5)
 
         Vessel.objects.all().delete()
+
         for _, row in subdf.iterrows():
             vessel = Vessel.objects.create(
                 name=row["name"],
@@ -64,10 +64,12 @@ class Command(BaseCommand):
                 fuel_capacity_tons=row["fuel_capacity_tons"],
                 status=row["status"],
             )
+
             n_voyages = random.choice(VOYAGES)
-            for i in range(n_voyages):
-                departure_port = random.choice(PORTS)
-                destination_port = random.choice([port for port in PORTS if port != departure_port])
+
+            for voyage_index in range(n_voyages):
+                departure_port, destination_port = random.sample(PORTS, 2)
+
                 voyage = Voyage.objects.create(
                     vessel=vessel,
                     departure_port=departure_port,
@@ -75,17 +77,17 @@ class Command(BaseCommand):
                     departure_time=timezone.now() - timedelta(days=5),
                     estimated_arrival=timezone.now() + timedelta(days=15),
                     distance_nm=random.choice(DISTANCES),
-                    status=random.choice(STATUS_CHOICES)
+                    status=random.choice(STATUS_CHOICES),
                 )
 
                 start_time = timezone.now() - timedelta(hours=24)
 
-                for i in range(TELEMETRY_RECORDS):
+                for telemetry_index in range(TELEMETRY_RECORDS):
                     record = TelemetryRecord.objects.create(
                         voyage=voyage,
-                        timestamp=start_time + timedelta(minutes=30 * i),
-                        latitude=-4.05 + (i * 0.15),
-                        longitude=39.67 + (i * 0.20),
+                        timestamp=start_time + timedelta(minutes=30 * telemetry_index),
+                        latitude=-4.05 + (telemetry_index * 0.15),
+                        longitude=39.67 + (telemetry_index * 0.20),
                         speed_knots=random.choice([2.5, 8.5, 12.0, 14.2]),
                         fuel_consumption_tons_per_day=random.choice([28, 32, 45, 58, 62]),
                         engine_temperature_celsius=random.choice([78, 84, 91, 97, 108]),
@@ -94,7 +96,11 @@ class Command(BaseCommand):
 
                     generate_alerts_for_telemetry(record)
 
-                self.stdout.write(
-                    self.style.SUCCESS("Demo data and alerts generated successfully.")
-                )
-                # print(f"Wrote {TELEMETRY_RECORDS} Telemetry records for vessel {vessel.name} moving from {voyage.departure_port} to {voyage.destination_port}")
+                # self.stdout.write(
+                #     f"Wrote {TELEMETRY_RECORDS} telemetry records for "
+                #     f"{vessel.name}: {voyage.departure_port} to {voyage.destination_port}"
+                # )
+
+        self.stdout.write(
+            self.style.SUCCESS("Demo data and alerts generated successfully.")
+        )
