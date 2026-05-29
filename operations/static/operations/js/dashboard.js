@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     loadKPIs();
     loadAlertsTable();
+    loadAlertTypeChart();
 });
 
 
@@ -42,4 +43,31 @@ async function loadAlertsTable() {
     }
 }
 
+async function loadAlertTypeChart() {
+    const response = await fetch("/api/alerts/summary-by-type/");
+    const data = await response.json();
+    const labels = data.map(item => item.alert_type);
+    const counts = data.map(item => item.count);
 
+    const chartCanvas = document.getElementById("alert-type-chart");
+
+    new Chart(chartCanvas, {
+        type: "doughnut",
+        data: {
+            labels: labels,
+            datasets: [
+                {
+                    data: counts
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: "botton"
+                }
+            }
+        }
+    });
+}
