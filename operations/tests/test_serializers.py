@@ -10,7 +10,13 @@ from operations.models import (
     OperationalAlert,
 )
 
-from operations.serializers import OperationalAlertSerializer
+from operations.serializers import (
+    VesselSerializer,
+    VoyageSerializer,
+    TelemetrySerializer,
+    OperationalAlertSerializer,
+)
+
 
 class OperationAlertSerializerTest(TestCase):
     def setUp(self):
@@ -63,3 +69,40 @@ class OperationAlertSerializerTest(TestCase):
             "Engine temperature exceeded safe threshold."
         )
         
+        # Redundant serializers
+    def test_vessel_serializer(self):
+        serializer = VesselSerializer(self.vessel)
+
+        self.assertEqual(
+            serializer.data["name"],
+            "MV Test Vessel"
+        )
+
+    def test_voyage_serializer(self):
+        serializer = VoyageSerializer(self.voyage)
+
+        self.assertEqual(
+            serializer.data["departure_port"],
+            "Mombasa"
+        )
+
+        self.assertEqual(
+            serializer.data["destination_port"],
+            "Rotterdam"
+        )
+
+    def test_telemetry_serializer(self):
+        serializer = TelemetrySerializer(self.telemetry)
+
+        self.assertEqual(
+            serializer.data["speed_knots"],
+            12.0
+        )
+
+        self.assertEqual(
+            serializer.data["engine_temperature_celsius"],
+            108.0
+        )
+
+
+
