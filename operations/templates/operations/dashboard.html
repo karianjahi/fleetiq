@@ -2,11 +2,13 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>FleetIQ Dashboard</title>
     <link rel="stylesheet" href="{% static 'operations/css/dashboard.css' %}">
 </head>
+
 <body>
 
     <header class="dashboard-header">
@@ -48,6 +50,11 @@
             </div>
         </section>
 
+        <section class="panel chart-panel">
+            <h2>Alerts Distribution by Type</h2>
+            <canvas id="alert-type-chart"></canvas>
+        </section>
+
         <section class="panel">
             <h2>Latest Operational Alerts</h2>
 
@@ -66,7 +73,8 @@
         </section>
 
     </main>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="{% static 'operations/js/dashboard.js' %}"></script>
 </body>
+
 </html>
