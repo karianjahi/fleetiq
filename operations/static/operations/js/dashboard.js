@@ -65,7 +65,8 @@ async function loadAlertTypeChart() {
             responsive: true,
             plugins: {
                 legend: {
-                    position: "botton"
+                    display: true,
+                    position: "bottom"
                 }
             }
         }

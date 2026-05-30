@@ -161,3 +161,19 @@ td {
         padding: 20px;
     }
 }
+
+/* 
+   Chart panel spacing
+   Separates visual analytics from KPI cards and tables.
+*/
+.chart-panel {
+    margin-bottom: 30px;
+}
+
+/* 
+   Chart canvas sizing
+   Prevents the chart from becoming too tall on large screens.
+*/
+.chart-panel canvas {
+    max-height: 360px;
+}
