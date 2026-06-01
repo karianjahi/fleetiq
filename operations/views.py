@@ -7,7 +7,6 @@ from rest_framework.response import Response
 from .models import Vessel, Voyage, TelemetryRecord, OperationalAlert
 from .serializers import OperationalAlertSerializer
 
-
 @api_view(["GET"])
 def dashboard_kpis(request):
     data = {
@@ -40,7 +39,25 @@ def alert_summary_by_type(request):
         .annotate(count=Count("id"))
         .order_by("alert_type")
     )
-    return Response(list(data))
+    alert_type_map = dict(
+        OperationalAlert.ALERT_TYPES
+    )
+    
+    counts = [item["count"] for item in data]
+    total_counts = sum(counts)
+    
+    results = []
+    for item in data:
+        alert_type = item["alert_type"]
+        results.append({
+            "alert_type": alert_type,
+            "alert_type_display": alert_type_map[alert_type],
+            "count": item["count"],
+            "percentage": (round(item["count"]/total_counts * 100, 2)
+                           if total_counts
+                           else 0),
+            })
+    return Response(results)
 
 
 @api_view(["GET"])
