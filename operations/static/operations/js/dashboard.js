@@ -4,37 +4,44 @@ document.addEventListener("DOMContentLoaded", () => {
     loadAlertTypeChart();
 });
 
+async function fetchData(url) {
+    const response = await fetch(url);
+    if (!response.ok) {
+        throw new Error(`HTTP Error ${response.status}`);
+    }
+    return await response.json();
+}
+
 
 async function loadKPIs() {
-    const response = await fetch("/api/dashboard/kpis/");
-    const data = await response.json();
-
-    document.getElementById("total-vessels").textContent = data.total_vessels;
-    document.getElementById("active-vessels").textContent = data.active_vessels;
-    document.getElementById("total-voyages").textContent = data.total_voyages;
-    document.getElementById("total-alerts").textContent = data.total_alerts;
-    document.getElementById("critical-alerts").textContent = data.critical_alerts;
-    document.getElementById("unresolved-alerts").textContent = data.unresolved_alerts;
+    try {
+        const data = await fetchData("/api/dashboard/kpis/");
+        document.getElementById("total-vessels").textContent = data.total_vessels;
+        document.getElementById("active-vessels").textContent = data.active_vessels;
+        document.getElementById("total-voyages").textContent = data.total_voyages;
+        document.getElementById("total-alerts").textContent = data.total_alerts;
+        document.getElementById("critical-alerts").textContent = data.critical_alerts;
+        document.getElementById("unresolved-alerts").textContent = data.unresolved_alerts;
+    } catch(error) {
+        console.error(error)
+    }
+    
 }
 
 
 async function loadAlertsTable() {
     try {
-        const response = await fetch("/api/alerts/latest/");
-        if (!response.ok) {
-            throw new Error("Failed to fetch KPI data");
-        }
-        const data = await response.json();
+        const data = await fetchData("/api/alerts/latest/");
         const tableBodyEl = document.getElementById("latest-alerts-table");
         let htmlTable = "";
         for (const item of data) {
             htmlTable += 
             `<tr> 
-                <td>${item.vessel_name}</td> 
-                <td>${item.alert_type_display}</td> 
-                <td>${item.severity_display}</td> 
-                <td>${item.message}</td> 
-                <td>${new Date(item.created_at).toLocaleString()}</td> 
+            <td>${item.vessel_name}</td> 
+            <td>${item.alert_type_display}</td> 
+            <td>${item.severity_display}</td> 
+            <td>${item.message}</td> 
+            <td>${new Date(item.created_at).toLocaleString()}</td> 
             </tr>`;
         }
         tableBodyEl.innerHTML = htmlTable;
@@ -44,31 +51,46 @@ async function loadAlertsTable() {
 }
 
 async function loadAlertTypeChart() {
-    const response = await fetch("/api/alerts/summary-by-type/");
-    const data = await response.json();
-    const labels = data.map(item => item.alert_type);
-    const counts = data.map(item => item.count);
-
-    const chartCanvas = document.getElementById("alert-type-chart");
-
-    new Chart(chartCanvas, {
-        type: "doughnut",
-        data: {
-            labels: labels,
-            datasets: [
-                {
-                    data: counts
-                }
-            ]
-        },
-        options: {
-            responsive: true,
-            plugins: {
-                legend: {
-                    display: true,
-                    position: "bottom"
+    try {
+        const data = await fetchData("/api/alerts/summary-by-type/");
+        const labels = data.map(item => item.alert_type_display);
+        const counts = data.map(item => item.count);
+        const chartCanvas = document.getElementById("alert-type-chart");
+    
+        new Chart(chartCanvas, {
+            type: "doughnut",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        data: counts
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: "bottom"
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const item = data[context.dataIndex];
+                                return (
+                                    `${item.alert_type_display}: ` + 
+                                    `${item.count} alerts ` +
+                                    `(${item.percentage}%)`
+                                );
+                            }
+                        }
+                    }
                 }
             }
-        }
-    });
+        });
+    } catch(error) {
+        console.error(error)
+    }
+
 }
