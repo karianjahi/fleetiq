@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadKPIs();
     loadAlertsTable();
     loadAlertTypeChart();
+    loadSeverityChart();
 });
 
 async function fetchData(url) {
@@ -91,6 +92,50 @@ async function loadAlertTypeChart() {
         });
     } catch(error) {
         console.error(error)
-    }
+    } 
+}
 
+async function loadSeverityChart() {
+    try {
+        const data = await fetchData("/api/alerts/summary-by-severity/");
+        const labels = data.map(item => item.severity_display);
+        const counts = data.map(item => item.count);
+        const severityChartCanvas = document.getElementById("alert-severity-chart");
+
+        new Chart(severityChartCanvas, {
+            type: "doughnut",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        data: counts
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: "bottom",
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const item = data[context.dataIndex];
+                                return (
+                                    `${item.severity_display}: ` +
+                                    `${item.count} alerts ` + 
+                                    `(${item.percentage}%)`
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    } catch(error) {
+        console.error(error);
+    }
+    
 }
