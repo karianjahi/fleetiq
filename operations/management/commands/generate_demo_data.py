@@ -13,7 +13,6 @@ from django.conf import settings
 from operations.models import Vessel, Voyage, TelemetryRecord
 from operations.services.alert_engine import generate_alerts_for_telemetry
 
-
 FILEPATH = Path(settings.BASE_DIR)
 
 PORTS = [
@@ -66,7 +65,8 @@ class Command(BaseCommand):
             )
 
             n_voyages = random.choice(VOYAGES)
-
+            departure_time = timezone.now() - timedelta(days=random.randint(5, 90))
+            estimated_arrival = timezone.now() + timedelta(days=random.randint(7, 30))
             for voyage_index in range(n_voyages):
                 departure_port, destination_port = random.sample(PORTS, 2)
 
@@ -74,13 +74,13 @@ class Command(BaseCommand):
                     vessel=vessel,
                     departure_port=departure_port,
                     destination_port=destination_port,
-                    departure_time=timezone.now() - timedelta(days=5),
-                    estimated_arrival=timezone.now() + timedelta(days=15),
+                    departure_time=departure_time,
+                    estimated_arrival=estimated_arrival,
                     distance_nm=random.choice(DISTANCES),
                     status=random.choice(STATUS_CHOICES),
                 )
 
-                start_time = timezone.now() - timedelta(hours=24)
+                start_time = departure_time
 
                 for telemetry_index in range(TELEMETRY_RECORDS):
                     record = TelemetryRecord.objects.create(
@@ -89,7 +89,9 @@ class Command(BaseCommand):
                         latitude=-4.05 + (telemetry_index * 0.15),
                         longitude=39.67 + (telemetry_index * 0.20),
                         speed_knots=random.choice([2.5, 8.5, 12.0, 14.2]),
-                        fuel_consumption_tons_per_day=random.choice([28, 32, 45, 58, 62]),
+                        fuel_consumption_tons_per_day=random.choice(
+                            [28, 32, 45, 58, 62]
+                        ),
                         engine_temperature_celsius=random.choice([78, 84, 91, 97, 108]),
                         weather_risk_score=random.choice([0.2, 0.4, 0.65, 0.78, 0.92]),
                     )
