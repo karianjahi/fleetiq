@@ -75,6 +75,10 @@ async function loadAlertTypeChart() {
                         display: true,
                         position: "bottom"
                     },
+                    title: {
+                        display: true,
+                        text: "Alert distribution by type",
+                    },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
@@ -118,6 +122,10 @@ async function loadSeverityChart() {
                     legend: {
                         display: true,
                         position: "bottom",
+                    },
+                    title: {
+                        display: true,
+                        text: "Alert Distribution by Severity",
                     },
                     tooltip: {
                         callbacks: {
