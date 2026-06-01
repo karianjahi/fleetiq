@@ -19,6 +19,7 @@ def generate_alerts_for_telemetry(record):
                     f"Engine temperature reached "
                     f"{record.engine_temperature_celsius}°C."
                 ),
+                detected_at=record.timestamp,
             )
         )
 
@@ -34,6 +35,7 @@ def generate_alerts_for_telemetry(record):
                     f"High weather risk detected "
                     f"with score {record.weather_risk_score}."
                 ),
+                detected_at=record.timestamp,
             )
         )
 
@@ -49,6 +51,7 @@ def generate_alerts_for_telemetry(record):
                     f"Low vessel speed detected: "
                     f"{record.speed_knots} knots."
                 ),
+                detected_at=record.timestamp,
             )
         )
 
@@ -68,6 +71,7 @@ def generate_alerts_for_telemetry(record):
                     f"{record.fuel_consumption_tons_per_day} tons/day "
                     f"at {record.speed_knots} knots."
                 ),
+                detected_at=record.timestamp,
             )
         )
     return alerts

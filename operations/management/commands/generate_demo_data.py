@@ -65,10 +65,10 @@ class Command(BaseCommand):
             )
 
             n_voyages = random.choice(VOYAGES)
-            departure_time = timezone.now() - timedelta(days=random.randint(5, 90))
-            estimated_arrival = timezone.now() + timedelta(days=random.randint(7, 30))
             for voyage_index in range(n_voyages):
                 departure_port, destination_port = random.sample(PORTS, 2)
+                departure_time = timezone.now() - timedelta(days=random.randint(5, 90))
+                estimated_arrival = departure_time + timedelta(days=random.randint(7, 30))
 
                 voyage = Voyage.objects.create(
                     vessel=vessel,
@@ -81,11 +81,13 @@ class Command(BaseCommand):
                 )
 
                 start_time = departure_time
+                voyage_duration = estimated_arrival - departure_time
+                telemetry_interval = voyage_duration / TELEMETRY_RECORDS
 
                 for telemetry_index in range(TELEMETRY_RECORDS):
                     record = TelemetryRecord.objects.create(
                         voyage=voyage,
-                        timestamp=start_time + timedelta(minutes=30 * telemetry_index),
+                        timestamp=start_time + (telemetry_interval * telemetry_index),
                         latitude=-4.05 + (telemetry_index * 0.15),
                         longitude=39.67 + (telemetry_index * 0.20),
                         speed_knots=random.choice([2.5, 8.5, 12.0, 14.2]),

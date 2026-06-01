@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.db.models import Count
+from django.db.models.functions import TruncDate
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
@@ -7,7 +8,7 @@ from rest_framework.response import Response
 from .models import Vessel, Voyage, TelemetryRecord, OperationalAlert
 from .serializers import OperationalAlertSerializer
 
-import pandas as pd
+
 
 
 @api_view(["GET"])
@@ -97,6 +98,19 @@ def voyage_status_summary(request):
     )
     return Response(list(data))
 
+
+@api_view(["GET"])
+def alerts_over_time(request):
+    data = (
+        OperationalAlert.objects
+        .exclude(detected_at__isnull=True)
+        .annotate(date=TruncDate("detected_at"))
+        .values("date")
+        .annotate(count=Count("id"))
+        .order_by("date")
+    )
+    print(data)
+    return Response(data)
 
 def dashboard_view(request):
     return render(request, "operations/dashboard.html")
