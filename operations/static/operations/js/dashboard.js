@@ -3,6 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadAlertsTable();
     loadAlertTypeChart();
     loadSeverityChart();
+    loadAlertsTimeSeries();
 });
 
 async function fetchData(url) {
@@ -147,3 +148,68 @@ async function loadSeverityChart() {
     }
     
 }
+
+async function loadAlertsTimeSeries() {
+    try {
+        const data = await fetchData("/api/alerts/over-time/");
+        const labels = data.map(item => new Date(item.date).toLocaleDateString(
+            "en-US",
+            {
+                year: "numeric",
+                month: "short",
+                day: "numeric",
+            }
+        ));
+        const totalAlerts = data.map(item => item.total_alerts);
+        const criticalAlerts = data.map(item => item.critical_alerts);
+        const alertEvolutionCanvas = document.getElementById("alert-time-evolution");
+
+        new Chart(alertEvolutionCanvas, {
+            type: "line",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: "All Alerts (Both High and Critical)",
+                        data: totalAlerts,
+                        tension: 0.3,
+                    },
+                    {
+                        label: "Critical Alerts",
+                        data: criticalAlerts,
+                        tension: 0.3,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: "top",
+                    },
+                    title: {
+                        display: false,
+                        text: "Time Evolution of Alerts",
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                return `${context.raw} alerts`;
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    } catch(error) {
+        console.error(error)
+    }
+}
+
+

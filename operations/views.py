@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.db.models import Count
+from django.db.models import Count, Q
 from django.db.models.functions import TruncDate
 
 from rest_framework.decorators import api_view
@@ -103,13 +103,17 @@ def voyage_status_summary(request):
 def alerts_over_time(request):
     data = (
         OperationalAlert.objects
-        .exclude(detected_at__isnull=True)
         .annotate(date=TruncDate("detected_at"))
         .values("date")
-        .annotate(count=Count("id"))
+        .annotate(
+            total_alerts=Count("id"),
+            critical_alerts=Count(
+                "id",
+                filter=Q(severity=5)
+                )
+            )
         .order_by("date")
     )
-    print(data)
     return Response(data)
 
 def dashboard_view(request):

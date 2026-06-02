@@ -13,7 +13,7 @@ urlpatterns = [
     path("api/voyages/status-summary/", views.voyage_status_summary),
     
     path("api/alerts/over-time/", views.alerts_over_time, name="alerts-over-time"),
-    
+        
     path("dashboard/", views.dashboard_view, name="dashboard"),
 ]
 
