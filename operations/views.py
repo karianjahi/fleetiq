@@ -10,6 +10,8 @@ from .serializers import OperationalAlertSerializer
 
 
 
+def dashboard_view(request):
+    return render(request, "operations/dashboard.html")
 
 @api_view(["GET"])
 def dashboard_kpis(request):
@@ -116,5 +118,29 @@ def alerts_over_time(request):
     )
     return Response(data)
 
-def dashboard_view(request):
-    return render(request, "operations/dashboard.html")
+@api_view(["GET"])
+def top_vessels_by_alerts(request):
+    data = (
+        OperationalAlert.objects
+        .values("voyage__vessel__name")
+        .annotate(alert_count=Count("id"))
+        .order_by("-alert_count")[:10]
+    )
+    
+    total_count = sum(item["alert_count"] for item in data)
+    results = []
+    
+    for item in data:
+        results.append(
+            {
+                "vessel_name": item["voyage__vessel__name"],
+                "alert_count": item["alert_count"],
+                "percentage": round(
+                    item["alert_count"]/total_count * 100, 2
+                    ) 
+                if total_count else 0
+            }
+        )
+        
+    return Response(results)
+

@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadAlertTypeChart();
     loadSeverityChart();
     loadAlertsTimeSeries();
+    loadAlertsByVessel();
 });
 
 async function fetchData(url) {
@@ -212,4 +213,48 @@ async function loadAlertsTimeSeries() {
     }
 }
 
+async function loadAlertsByVessel() {
+    try {
+        const data = await fetchData("/api/alerts/top-vessels/")
+        const labels = data.map(item => item.vessel_name);
+        const alertCounts = data.map(item => item.alert_count);
+        const alertByVesselCanvas = document.getElementById("alert-by-vessel-chart");
+        console.log(data);
+        new Chart(alertByVesselCanvas, {
+            type: "bar",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        data: alertCounts,
+                        label: "Alert count",
+                    }
+                ]
+            },
+            options: {
+                indexAxis: "y",
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const item = data[context.dataIndex]
+                                return (
+                                    `${item.percentage}% of top 10 alerts`
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+        });
 
+    } catch(error) {
+        console.error(error);
+    }
+}

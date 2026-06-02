@@ -2,6 +2,8 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
+    path("dashboard/", views.dashboard_view, name="dashboard"),
+    
     path("api/dashboard/kpis/", views.dashboard_kpis, name="dashboard-kpis"),
     
     path("api/alerts/latest/", views.latest_alerts, name="latest-alerts"),
@@ -13,8 +15,9 @@ urlpatterns = [
     path("api/voyages/status-summary/", views.voyage_status_summary),
     
     path("api/alerts/over-time/", views.alerts_over_time, name="alerts-over-time"),
-        
-    path("dashboard/", views.dashboard_view, name="dashboard"),
+    
+    path("api/alerts/top-vessels/", views.top_vessels_by_alerts, name="top-alerts-vessels"),
+    
 ]
 
 
