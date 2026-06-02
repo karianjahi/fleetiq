@@ -4,9 +4,14 @@ from django.db.models.functions import TruncDate
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.generics import ListAPIView
 
 from .models import Vessel, Voyage, TelemetryRecord, OperationalAlert
-from .serializers import OperationalAlertSerializer
+
+from .serializers import (
+    OperationalAlertSerializer,
+    VesselSerializer
+)
 
 
 
@@ -144,3 +149,9 @@ def top_vessels_by_alerts(request):
         
     return Response(results)
 
+class VesselListAPIView(ListAPIView):
+    queryset = Vessel.objects.all().order_by("name")
+    serializer_class = VesselSerializer
+
+def vessel_list_view(request):
+    return render(request, "operations/vessels.html")
