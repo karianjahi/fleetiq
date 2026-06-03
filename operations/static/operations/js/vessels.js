@@ -17,7 +17,13 @@ async function loadVessels() {
         const vesselEl = document.getElementById("vessel-list");
         let html = "";
         for (const item of data) {
-            html += `<div class="vessel-card">${item.name}</div>`
+            html += `
+            <a href="/vessels/${item.id}/" class="vessel-card">
+            <h3>${item.name}</h3>
+            <p>${item.vessel_type}</p>
+            <p>Status: ${item.status}</p>
+            </a>
+            `
         }
         vesselEl.innerHTML = html;
     } catch(error) {

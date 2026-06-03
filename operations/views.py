@@ -4,16 +4,35 @@ from django.db.models.functions import TruncDate
 
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework.generics import ListAPIView
+from rest_framework.generics import (
+    ListAPIView,
+    RetrieveAPIView
+    )
 
 from .models import Vessel, Voyage, TelemetryRecord, OperationalAlert
 
 from .serializers import (
     OperationalAlertSerializer,
-    VesselSerializer
+    VesselSerializer,
+    VoyageSerializer,
 )
 
 
+class VesselListAPIView(ListAPIView):
+    queryset = Vessel.objects.all().order_by("name")
+    serializer_class = VesselSerializer
+    
+class VesselDetailAPIView(RetrieveAPIView):
+    queryset = Vessel.objects.all()
+    serializer_class = VesselSerializer
+
+class VesselVoyageListAPIView(ListAPIView):
+    serializer_class = VoyageSerializer
+    def get_queryset(self):
+        vessel_id = self.kwargs["vessel_id"]
+        return Voyage.objects.filter(
+            vessel_id=vessel_id
+        ).order_by("-departure_time")
 
 def dashboard_view(request):
     return render(request, "operations/dashboard.html")
@@ -149,9 +168,13 @@ def top_vessels_by_alerts(request):
         
     return Response(results)
 
-class VesselListAPIView(ListAPIView):
-    queryset = Vessel.objects.all().order_by("name")
-    serializer_class = VesselSerializer
+    
+def vessel_detail_view(request, vessel_id):
+    return render(
+        request,
+        "operations/vessel_detail.html",
+        {"vessel_id": vessel_id}
+    )
 
 def vessel_list_view(request):
     return render(request, "operations/vessels.html")
