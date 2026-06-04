@@ -15,6 +15,8 @@ from operations.services.alert_engine import generate_alerts_for_telemetry
 
 FILEPATH = Path(settings.BASE_DIR)
 
+NO_OF_VESSELS = 15
+
 PORTS = [
     "Mombasa",
     "Rotterdam",
@@ -50,7 +52,7 @@ class Command(BaseCommand):
             FILEPATH / "operations" / "management" / "commands" / "vessels.csv"
         )
 
-        subdf = vessel_df.sample(frac=1).head(5)
+        subdf = vessel_df.sample(frac=1).head(NO_OF_VESSELS)
 
         Vessel.objects.all().delete()
 
