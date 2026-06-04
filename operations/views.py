@@ -192,3 +192,30 @@ class VesselAlertListAPIView(ListAPIView):
             "voyage__vessel",
             "telemetry_record",
         ).order_by("-detected_at")
+
+@api_view(["GET"])
+def vessel_kpis(request, vessel_id):
+    alerts = OperationalAlert.objects.filter(
+        voyage__vessel_id=vessel_id
+    )
+    voyages = Voyage.objects.filter(
+        vessel_id=vessel_id
+    )
+    latest_alert = (
+        alerts.order_by("-detected_at")
+        .first()
+    )
+    
+    latest_alert_type = (
+        latest_alert.get_alert_type_display() if latest_alert else "None"
+    )
+    
+    return Response(
+        {
+        "total_voyages": voyages.count(),
+        "total_alerts": alerts.count(),
+        "critical_alerts": alerts.filter(severity=5).count(),
+        "latest_alert": latest_alert_type,
+        }
+    )
+    

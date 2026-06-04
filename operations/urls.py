@@ -29,6 +29,8 @@ urlpatterns = [
     path("api/vessels/<int:vessel_id>/voyages/", views.VesselVoyageListAPIView.as_view(), name="vessel-voyages-api"),
     
     path("api/vessels/<int:vessel_id>/alerts/", views.VesselAlertListAPIView.as_view(), name="vessel-alerts-api"),
+    
+    path("api/vessels/<int:vessel_id>/kpis/", views.vessel_kpis, name="vessel-kpis"),
 ]
 
 

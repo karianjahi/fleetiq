@@ -5,6 +5,7 @@ const vesselId = currentPath.split("/")[2];
 loadVesselDetail(vesselId);
 loadVoyageList(vesselId);
 loadVesselAlerts(vesselId);
+loadVesselKPIs(vesselId);
 
 function formatDateTime(date) {
     return new Date(date).toLocaleString(
@@ -125,4 +126,34 @@ async function loadVesselAlerts(vesselId) {
     } catch (error) {
         console.error(error);
     }
+}
+
+async function loadVesselKPIs(vesselId) {
+    try {
+        const url = `/api/vessels/${vesselId}/kpis/`;
+        const data = await fetchData(url);
+        console.log(data);
+        document.getElementById("total-voyages").textContent = data.total_voyages;
+        document.getElementById("total-alerts").textContent = data.total_alerts;
+        document.getElementById("critical-alerts").textContent = data.critical_alerts;
+        document.getElementById("latest-alert-type").textContent = data.latest_alert;
+    } catch(error) {
+        console.error("Failed to load vessel KPIs:", error);
+    }
+    // const kpiSummaryEl = document.getElementById("summary_kpis");
+    // html = `
+    //     <div class="alert-card">
+    //         <h2>Total Voyages</h2>
+    //         <p>${data.total_voyages}</p>
+    //     </div><div class="alert-card">
+    //         <h2>Total Alerts</h2>
+    //         <p>${data.total_alerts}</p>
+    //     </div>
+    //         </div><div class="alert-card">
+    //         <h2>Critical Alerts</h2>
+    //         <p>${data.total_alerts}</p>
+    //     </div>
+    
+    // `
+    // kpiSummaryEl.innerHTML = html;
 }
