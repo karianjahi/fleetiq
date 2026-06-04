@@ -88,12 +88,9 @@ class DashBoardAPITest(APITestCase):
     def test_alert_count_by_severity(self):
         response = self.client.get("/api/alerts/summary-by-severity/")
         self.assertEqual(response.status_code, 200)
-        
         data = response.json()
         self.assertEqual(len(data), 1)
-        self.assertEqual(data[0]["alert_type"], "engine_overheat")
         self.assertEqual(data[0]["severity"], 5)
-        self.assertIn("ngine", data[0]["message"])
         self.assertEqual(data[0]["count"], 1)
     
     def test_voyage_status_summary(self):

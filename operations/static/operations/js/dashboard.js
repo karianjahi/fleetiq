@@ -219,7 +219,6 @@ async function loadAlertsByVessel() {
         const labels = data.map(item => item.vessel_name);
         const alertCounts = data.map(item => item.alert_count);
         const alertByVesselCanvas = document.getElementById("alert-by-vessel-chart");
-        console.log(data);
         new Chart(alertByVesselCanvas, {
             type: "bar",
             data: {

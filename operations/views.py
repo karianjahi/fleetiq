@@ -17,6 +17,7 @@ from .serializers import (
     VoyageSerializer,
 )
 
+from .services import services_utils
 
 class VesselListAPIView(ListAPIView):
     queryset = Vessel.objects.all().order_by("name")
@@ -210,12 +211,35 @@ def vessel_kpis(request, vessel_id):
         latest_alert.get_alert_type_display() if latest_alert else "None"
     )
     
+    vessel_alerts = OperationalAlert.objects.filter(
+        voyage__vessel_id = vessel_id,
+    )
+    total_alerts = vessel_alerts.count()
+    critical_alerts = vessel_alerts.filter(severity=5).count()
+    health_status = services_utils.determine_risk_profile(critical_alerts, total_alerts)
+    
     return Response(
         {
         "total_voyages": voyages.count(),
         "total_alerts": alerts.count(),
         "critical_alerts": alerts.filter(severity=5).count(),
         "latest_alert": latest_alert_type,
+        "health_status": health_status,
         }
     )
     
+@api_view(["GET"])
+def vessel_health_status(request, vessel_id):
+    vessel_alerts = OperationalAlert.objects.filter(
+        voyage__vessel_id = vessel_id,
+    )
+    total_alerts = vessel_alerts.count()
+    critical_alerts = vessel_alerts.filter(severity=5).count()
+    health_status = services_utils.determine_risk_profile(critical_alerts, total_alerts)
+    data = {
+        "health_status": health_status,
+        "total_alerts": total_alerts,
+        "critical_alerts": critical_alerts,
+        
+    }
+    return Response(data)

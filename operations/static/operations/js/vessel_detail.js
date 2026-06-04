@@ -132,11 +132,11 @@ async function loadVesselKPIs(vesselId) {
     try {
         const url = `/api/vessels/${vesselId}/kpis/`;
         const data = await fetchData(url);
-        console.log(data);
         document.getElementById("total-voyages").textContent = data.total_voyages;
         document.getElementById("total-alerts").textContent = data.total_alerts;
         document.getElementById("critical-alerts").textContent = data.critical_alerts;
         document.getElementById("latest-alert-type").textContent = data.latest_alert;
+        document.getElementById("health-status").textContent =  data.health_status;
     } catch(error) {
         console.error("Failed to load vessel KPIs:", error);
     }

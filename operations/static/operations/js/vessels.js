@@ -13,7 +13,6 @@ async function fetchData(url) {
 async function loadVessels() {
     try {
         const data = await fetchData("/api/vessels/");
-        console.log(data);
         const vesselEl = document.getElementById("vessel-list");
         let html = "";
         for (const item of data) {
