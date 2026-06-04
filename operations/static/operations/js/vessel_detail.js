@@ -7,13 +7,18 @@ loadVoyageList(vesselId);
 loadVesselAlerts(vesselId);
 
 function formatDateTime(date) {
-    return new Date(date).toLocaleString("en-US", {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-                hour: "2-digit",
-                minute: "2-digit",
-    })
+    return new Date(date).toLocaleString(
+        "en-GB",
+        {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: "UTC",
+        }
+    ) + " UTC";
 }
 
 async function fetchData(url) {
