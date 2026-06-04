@@ -1,11 +1,15 @@
-
 const currentPath = window.location.pathname
 const vesselId = currentPath.split("/")[2];
+
+let allAlerts = [];
+let currentAlertPage = 1;
+const alertsPerPage = 10;
 
 loadVesselDetail(vesselId);
 loadVoyageList(vesselId);
 loadVesselAlerts(vesselId);
 loadVesselKPIs(vesselId);
+setUpAlertPagination();
 
 function formatDateTime(date) {
     return new Date(date).toLocaleString(
@@ -94,38 +98,63 @@ async function loadVesselAlerts(vesselId) {
     try {
         const url = `/api/vessels/${vesselId}/alerts/`;
         const data = await fetchData(url);
-        const alertsListEl = document.getElementById("vessel-alert-list");
-        const alertTableBody = document.getElementById("alert-table-body");
-        let html = "";
 
-        for (const item of data) {
-            // html += `
-            //         <div class="alert-card">
-            //             <div class="alert-header">
-            //                 <h4>${item.alert_type_display}</h4>
-            //                 <span class="severity-badge">
-            //                     ${item.severity_display}
-            //                 </span>
-            //             </div>
-            //         <p>${item.message}</p>
-            //         </div>
-            // `
-            html += `
-                <tr>
-                    <td>${formatDateTime(item.detected_at)}</td>
-                    <td>${item.alert_type_display}</td>
-                    <td>${item.severity_display}</td>
-                    <td>${item.message}</td>
-                </tr>
-    `;
+        allAlerts = data;
+        currentAlertPage = 1;
 
-        }
+        renderAlertTable();
 
-        // alertsListEl.innerHTML = html;
-        alertTableBody.innerHTML = html;
+    //     const alertsListEl = document.getElementById("vessel-alert-list");
+    //     const alertTableBody = document.getElementById("alert-table-body");
+    //     let html = "";
+
+    //     for (const item of data) {
+    //         html += `
+    //             <tr>
+    //                 <td>${formatDateTime(item.detected_at)}</td>
+    //                 <td>${item.alert_type_display}</td>
+    //                 <td>${item.severity_display}</td>
+    //                 <td>${item.message}</td>
+    //             </tr>
+    // `;
+
+    //     }
+    //     alertTableBody.innerHTML = html;
     } catch (error) {
         console.error(error);
     }
+}
+
+async function renderAlertTable() {
+    const alertTableBody = document.getElementById("alert-table-body");
+    const start = (currentAlertPage - 1) * alertsPerPage;
+    const end = start + alertsPerPage;
+    const pageAlerts = allAlerts.slice(start, end);
+    let html = "";
+
+    for (const item of pageAlerts) {
+        html += `
+            <tr>
+                <td>${formatDateTime(item.detected_at)}</td>
+                <td>${item.alert_type_display}</td>
+                <td>${item.severity_display}</td>
+                <td>${item.message}</td>
+            </tr>
+        `
+    }
+
+    alertTableBody.innerHTML = html;
+
+    const totalPages = Math.ceil(
+        allAlerts.length / alertsPerPage
+    );
+
+    document.getElementById("alert-page-info").textContent = `Page ${currentAlertPage} of ${totalPages}`;
+
+    document.getElementById("prev-alert-page").disabled = currentAlertPage === 1;
+    document.getElementById("next-alert-page").disabled = currentAlertPage === totalPages;
+
+    
 }
 
 async function loadVesselKPIs(vesselId) {
@@ -140,20 +169,22 @@ async function loadVesselKPIs(vesselId) {
     } catch(error) {
         console.error("Failed to load vessel KPIs:", error);
     }
-    // const kpiSummaryEl = document.getElementById("summary_kpis");
-    // html = `
-    //     <div class="alert-card">
-    //         <h2>Total Voyages</h2>
-    //         <p>${data.total_voyages}</p>
-    //     </div><div class="alert-card">
-    //         <h2>Total Alerts</h2>
-    //         <p>${data.total_alerts}</p>
-    //     </div>
-    //         </div><div class="alert-card">
-    //         <h2>Critical Alerts</h2>
-    //         <p>${data.total_alerts}</p>
-    //     </div>
-    
-    // `
-    // kpiSummaryEl.innerHTML = html;
+}
+
+function setUpAlertPagination() {
+    document.getElementById("prev-alert-page").addEventListener("click", () => {
+        if (currentAlertPage > 1) {
+            currentAlertPage--;
+            renderAlertTable();
+        }
+    });
+
+    document.getElementById("next-alert-page").addEventListener("click", () => {
+        const totalPages = Math.ceil(allAlerts.length / alertsPerPage);
+
+        if (currentAlertPage < totalPages) {
+            currentAlertPage++;
+            renderAlertTable();
+        }
+    });
 }
