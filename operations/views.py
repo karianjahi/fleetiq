@@ -173,8 +173,22 @@ def vessel_detail_view(request, vessel_id):
     return render(
         request,
         "operations/vessel_detail.html",
-        {"vessel_id": vessel_id}
+        # {"vessel_id": vessel_id}
     )
 
 def vessel_list_view(request):
     return render(request, "operations/vessels.html")
+
+class VesselAlertListAPIView(ListAPIView):
+    serializer_class = OperationalAlertSerializer
+    
+    def get_queryset(self):
+        vessel_id = self.kwargs["vessel_id"]
+        
+        return OperationalAlert.objects.filter(
+            voyage__vessel_id=vessel_id
+        ).select_related(
+            "voyage",
+            "voyage__vessel",
+            "telemetry_record",
+        ).order_by("-detected_at")

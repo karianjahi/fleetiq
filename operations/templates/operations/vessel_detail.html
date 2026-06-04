@@ -2,21 +2,65 @@
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vessel Details</title>
+    <link href="{% static 'operations/css/vessel_detail.css' %}" rel="stylesheet">
 </head>
+
 <body>
 
-    <h1>Vessel Details</h1>
-    <div id="vessel-detail"></div>
-    
-    <h2>Voyages</h2>
-    <div id="voyage-list"></div>
+    <div class="navigation-bar">
+        <a href="/vessels/" class="back-link">
+            ← Back to Vessels
+        </a>
+    </div>
+
+    <div class="page-container">
+        <h1>Vessel Details</h1>
+        <section>
+            <div id="vessel-detail"></div>
+        </section>
+
+        <section>
+            <h2>Voyages</h2>
+            <div id="voyage-list"></div>
+            <table id="voyage-table">
+                <thead>
+                    <tr>
+                        <th>Departure Port</th>
+                        <th>Destination Port</th>
+                        <th>Departure Date</th>
+                        <th>Arrival Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="voyage-table-body"></tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2>Alerts</h2>
+            <table id="alert-table">
+                <thead>
+                    <tr>
+                        <th>Detected At</th>
+                        <th>Type</th>
+                        <th>Severity</th>
+                        <th>Message</th>
+                    </tr>
+                </thead>
+                <tbody id="alert-table-body"></tbody>
+            <div id="vessel-alert-list"></div>
+            </table>
+        </section>
+    </div>
 
 
     <script src="{% static 'operations/js/vessel_detail.js' %}"></script>
 
 </body>
+
 </html>

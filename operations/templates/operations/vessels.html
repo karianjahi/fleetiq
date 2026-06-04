@@ -1,14 +1,23 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="{% static 'operations/css/vessels.css' %}">
 </head>
+
 <body>
+    <div class="navigation-bar">
+        <a href="/dashboard/" class="back-link">
+            ← Back to Dashboard
+        </a>
+    </div>
     <h1>FleetIQ Vessels</h1>
     <div id="vessel-list"></div>
     <script src="{% static 'operations/js/vessels.js' %}"></script>
 </body>
+
 </html>
