@@ -71,6 +71,24 @@
 
         <section>
             <h2>Alerts</h2>
+            <div class="table-controls">
+                <label for="alert-filter">Filter:</label>
+                <select id="alert-filter">
+                    <option value="all">All</option>
+                    <option value="5">Critical</option>
+                    <option value="4">High</option>
+                    <option value="3">Medium</option>
+                    <option value="2">Low</option>
+                    <option value="1">Info</option>
+                </select>
+                <label for="alert-sort">Sort alerts:</label>
+                <select id="alert-sort">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="severity-high">Severity high to low</option>
+                    <option value="severity-low">Severity low to high</option>
+                </select>
+            </div>
             <table id="alert-table">
                 <thead>
                     <tr>

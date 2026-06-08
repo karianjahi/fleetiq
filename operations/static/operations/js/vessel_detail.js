@@ -10,6 +10,8 @@ loadVoyageList(vesselId);
 loadVesselAlerts(vesselId);
 loadVesselKPIs(vesselId);
 setUpAlertPagination();
+setUpAlertSorting();
+setUpAlertFiltering();
 
 function formatDateTime(date) {
     return new Date(date).toLocaleString(
@@ -103,33 +105,67 @@ async function loadVesselAlerts(vesselId) {
         currentAlertPage = 1;
 
         renderAlertTable();
-
-    //     const alertsListEl = document.getElementById("vessel-alert-list");
-    //     const alertTableBody = document.getElementById("alert-table-body");
-    //     let html = "";
-
-    //     for (const item of data) {
-    //         html += `
-    //             <tr>
-    //                 <td>${formatDateTime(item.detected_at)}</td>
-    //                 <td>${item.alert_type_display}</td>
-    //                 <td>${item.severity_display}</td>
-    //                 <td>${item.message}</td>
-    //             </tr>
-    // `;
-
-    //     }
-    //     alertTableBody.innerHTML = html;
     } catch (error) {
         console.error(error);
     }
 }
 
+async function loadVesselKPIs(vesselId) {
+    try {
+        const url = `/api/vessels/${vesselId}/kpis/`;
+        const data = await fetchData(url);
+        document.getElementById("total-voyages").textContent = data.total_voyages;
+        document.getElementById("total-alerts").textContent = data.total_alerts;
+        document.getElementById("critical-alerts").textContent = data.critical_alerts;
+        document.getElementById("latest-alert-type").textContent = data.latest_alert;
+        document.getElementById("health-status").textContent = data.health_status;
+    } catch (error) {
+        console.error("Failed to load vessel KPIs:", error);
+    }
+}
+
 async function renderAlertTable() {
     const alertTableBody = document.getElementById("alert-table-body");
+    const sortValue = document.getElementById("alert-sort").value;
+    const filterValue = document.getElementById("alert-filter").value;
+
+    let filteredAlerts = [...allAlerts];
+
+    if (filterValue !== "all") {
+        filteredAlerts = filteredAlerts.filter(item => item.severity === Number(filterValue))
+    }
+
+
+    let sortedAlerts = [...filteredAlerts];
+    if (sortValue === "newest") {
+        sortedAlerts.sort((a, b) => new Date(b.detected_at) - new Date(a.detected_at));
+    }
+
+    if (sortValue === "oldest") {
+        sortedAlerts.sort((a, b) => new Date(a.detected_at) - new Date(b.detected_at));
+    }
+
+    if (sortValue === "severity-high") {
+        sortedAlerts.sort((a, b) => b.severity - a.severity);
+    }
+
+    if (sortValue === "severity-low") {
+        sortedAlerts.sort((a, b) => a.severity - b.severity);
+    }
+
     const start = (currentAlertPage - 1) * alertsPerPage;
     const end = start + alertsPerPage;
-    const pageAlerts = allAlerts.slice(start, end);
+    const pageAlerts = sortedAlerts.slice(start, end);
+    if (pageAlerts.length === 0) {
+        alertTableBody.innerHTML = `
+        <tr>
+            <td colspan="4" style="text-align:center;">
+                No alerts found.
+            </td>
+        </tr>
+    `;
+        return;
+    }
     let html = "";
 
     for (const item of pageAlerts) {
@@ -146,29 +182,15 @@ async function renderAlertTable() {
     alertTableBody.innerHTML = html;
 
     const totalPages = Math.ceil(
-        allAlerts.length / alertsPerPage
-    );
+        sortedAlerts.length / alertsPerPage
+    ) || 1;
 
     document.getElementById("alert-page-info").textContent = `Page ${currentAlertPage} of ${totalPages}`;
 
     document.getElementById("prev-alert-page").disabled = currentAlertPage === 1;
     document.getElementById("next-alert-page").disabled = currentAlertPage === totalPages;
 
-    
-}
 
-async function loadVesselKPIs(vesselId) {
-    try {
-        const url = `/api/vessels/${vesselId}/kpis/`;
-        const data = await fetchData(url);
-        document.getElementById("total-voyages").textContent = data.total_voyages;
-        document.getElementById("total-alerts").textContent = data.total_alerts;
-        document.getElementById("critical-alerts").textContent = data.critical_alerts;
-        document.getElementById("latest-alert-type").textContent = data.latest_alert;
-        document.getElementById("health-status").textContent =  data.health_status;
-    } catch(error) {
-        console.error("Failed to load vessel KPIs:", error);
-    }
 }
 
 function setUpAlertPagination() {
@@ -186,5 +208,19 @@ function setUpAlertPagination() {
             currentAlertPage++;
             renderAlertTable();
         }
+    });
+}
+
+function setUpAlertSorting() {
+    document.getElementById("alert-sort").addEventListener("change", () => {
+        currentAlertPage = 1;
+        renderAlertTable();
+    });
+}
+
+function setUpAlertFiltering() {
+    document.getElementById("alert-filter").addEventListener("change", () => {
+        currentAlertPage = 1;
+        renderAlertTable();
     });
 }
