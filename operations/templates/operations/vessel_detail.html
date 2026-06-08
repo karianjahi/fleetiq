@@ -24,36 +24,38 @@
             <div id="vessel-detail"></div>
         </section>
 
-        <!-- <section>
-            <div id="summary_kpis"></div>
-        </section> -->
-        <div class="kpi-grid">
-            <div class="kpi-card">
-                <span>Total Voyages</span>
-                <strong id="total-voyages">...</strong>
-            </div>
+        <section>
+            <h2>Key Performance Indicators</h2>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <span>Total Voyages</span>
+                    <strong id="total-voyages">...</strong>
+                </div>
 
-            <div class="kpi-card">
-                <span>Total Alerts</span>
-                <strong id="total-alerts">...</strong>
-            </div>
+                <div class="kpi-card">
+                    <span>Total Alerts</span>
+                    <strong id="total-alerts">...</strong>
+                </div>
 
-            <div class="kpi-card">
-                <span>Critical Alerts</span>
-                <strong id="critical-alerts">...</strong>
+                <div class="kpi-card">
+                    <span>Critical Alerts</span>
+                    <strong id="critical-alerts">...</strong>
+                </div>
+                <div class="kpi-card alert-kpi">
+                    <span>Latest Alert Type</span>
+                    <strong id="latest-alert-type">...</strong>
+                </div>
+                <div class="kpi-card alert-kpi">
+                    <span>Health Status</span>
+                    <strong id="health-status">...</strong>
+                </div>
             </div>
-            <div class="kpi-card alert-kpi">
-                <span>Latest Alert Type</span>
-                <strong id="latest-alert-type">...</strong>
-            </div>
-            <div class="kpi-card alert-kpi">
-                <span>Health Status</span>
-                <strong id="health-status">...</strong>
-            </div>
-        </div>
+        </section>
 
         <section>
             <h2>Voyages</h2>
+
+            
             <div id="voyage-list"></div>
             <table id="voyage-table">
                 <thead>
@@ -67,6 +69,11 @@
                 </thead>
                 <tbody id="voyage-table-body"></tbody>
             </table>
+            <div class="pagination-controls">
+                <button id="prev-voyage-page">Previous</button>
+                <span id="voyage-page-info">Page 1</span>
+                <button id="next-voyage-page">Next</button>
+            </div>
         </section>
 
         <section>

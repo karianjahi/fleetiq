@@ -1,6 +1,10 @@
 const currentPath = window.location.pathname
 const vesselId = currentPath.split("/")[2];
 
+let allVoyages = [];
+let currentVoyagePage = 1;
+const voyagesPerPage = 5;
+
 let allAlerts = [];
 let currentAlertPage = 1;
 const alertsPerPage = 10;
@@ -12,6 +16,7 @@ loadVesselKPIs(vesselId);
 setUpAlertPagination();
 setUpAlertSorting();
 setUpAlertFiltering();
+setUpVoyagePagination()
 
 function formatDateTime(date) {
     return new Date(date).toLocaleString(
@@ -61,22 +66,28 @@ async function loadVoyageList(vesselId) {
     try {
         const url = `/api/vessels/${vesselId}/voyages/`;
         const data = await fetchData(url);
-        const voyageListEl = document.getElementById("voyage-list");
-        const tableBodyEl = document.getElementById("voyage-table-body");
-        let html = "";
-        for (const item of data) {
-            // html += `
-            //         <div class="voyage-card">
-            //             <div class="voyage-route">
-            //                 ${item.departure_port} → ${item.destination_port}
-            //             </div>
+        allVoyages = data;
+        currentVoyagePage = 1;
+        renderVoyageTable();
+    } catch (error) {
+        console.error(error);
+    }
 
-            //             <div class="voyage-meta">
-            //                 <span>Status: ${item.status}</span>
-            //             </div>
-            //         </div>
-            // `
-            html += `
+}
+
+async function renderVoyageTable() {
+    const voyageTableBody = document.getElementById("voyage-table-body");
+
+    const start = (currentVoyagePage - 1) * voyagesPerPage;
+
+    const end = start + voyagesPerPage;
+
+    const pageVoyages = allVoyages.slice(start, end);
+
+    let html = "";
+
+    for (const item of pageVoyages) {
+        html += `
             <tr>
                 <td>${item.departure_port}</td>
                 <td>${item.destination_port}</td>
@@ -85,15 +96,17 @@ async function loadVoyageList(vesselId) {
                 <td>${item.status}</td>
             </tr>
         `;
-        }
-
-        // voyageListEl.innerHTML = html;
-        tableBodyEl.innerHTML = html;
-
-    } catch (error) {
-        console.error(error);
     }
+    voyageTableBody.innerHTML = html;
 
+    const totalPages = Math.ceil(
+        allVoyages.length / voyagesPerPage
+    ) || 1;
+    document.getElementById("voyage-page-info").textContent = `Page ${currentVoyagePage} of ${totalPages}`;
+
+    document.getElementById("prev-voyage-page").disabled = currentVoyagePage === 1;
+
+    document.getElementById("next-voyage-page").disabled = currentVoyagePage === totalPages;
 }
 
 async function loadVesselAlerts(vesselId) {
@@ -211,6 +224,24 @@ function setUpAlertPagination() {
     });
 }
 
+function setUpVoyagePagination() {
+    document.getElementById("prev-voyage-page").addEventListener("click", () => {
+        if (currentVoyagePage > 1) {
+            currentVoyagePage--;
+            renderVoyageTable();
+        }
+    });
+
+    document.getElementById("next-voyage-page").addEventListener("click", () => {
+        const totalPages = Math.ceil(allVoyages.length / voyagesPerPage) || 1;
+        if (currentVoyagePage < totalPages) {
+            currentVoyagePage++;
+            renderVoyageTable();
+        }
+    });
+}
+
+
 function setUpAlertSorting() {
     document.getElementById("alert-sort").addEventListener("change", () => {
         currentAlertPage = 1;
@@ -224,3 +255,4 @@ function setUpAlertFiltering() {
         renderAlertTable();
     });
 }
+
