@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     loadSeverityChart();
     loadAlertsTimeSeries();
     loadAlertsByVessel();
+    loadHealthDistributionChart();
 });
 
 async function fetchData(url) {
@@ -253,6 +254,52 @@ async function loadAlertsByVessel() {
             }
         });
 
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+async function loadHealthDistributionChart() {
+    try {
+        const url = `/api/fleet/health-distribution/`;
+        const data = await fetchData(url);
+        const labels = data.map(item => item.health_status);
+        const counts = data.map(item => item.count);
+        const healthChartCanvas = document.getElementById("health-chart");
+
+        new Chart(healthChartCanvas, {
+            type: "doughnut",
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        data: counts,
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: "bottom"
+                    },
+                    // title: {
+                    //     display: true,
+                    //     text: "Fleet Health Distribution"
+                    // }
+                    tooltip: {
+                        callbacks: {
+                            label: function(context) {
+                                const item = data[context.dataIndex];
+
+                                return `${item.health_status}: ${item.count} vessels`;
+                            }
+                        }
+                    }
+                }
+            }
+        });
     } catch(error) {
         console.error(error);
     }

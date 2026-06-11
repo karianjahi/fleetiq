@@ -16,7 +16,8 @@ loadVesselKPIs(vesselId);
 setUpAlertPagination();
 setUpAlertSorting();
 setUpAlertFiltering();
-setUpVoyagePagination()
+setUpVoyagePagination();
+loadHealthDistributionChart(vesselId);
 
 function formatDateTime(date) {
     return new Date(date).toLocaleString(

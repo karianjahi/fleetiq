@@ -40,7 +40,7 @@ STATUS_CHOICES = [
     "cancelled",
 ]
 
-VOYAGES = [3, 2, 5, 6, 1]
+VOYAGES = [3, 2, 20, 16, 10, 7]
 TELEMETRY_RECORDS = 48
 
 

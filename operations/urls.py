@@ -33,6 +33,8 @@ urlpatterns = [
     path("api/vessels/<int:vessel_id>/kpis/", views.vessel_kpis, name="vessel-kpis"),
     
     path("api/vessels/<vessel_id>/health-status/", views.vessel_health_status, name="vessel-health"),
+    
+    path("api/fleet/health-distribution/", views.fleet_health_distribution, name="fleet-health-distribution"),
 ]
 
 
