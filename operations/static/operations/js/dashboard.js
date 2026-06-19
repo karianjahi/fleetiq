@@ -279,6 +279,15 @@ async function loadHealthDistributionChart() {
             },
             options: {
                 responsive: true,
+                onClick: function(event, elements) {
+                    if (elements.length > 0) {
+                        const index = elements[0].index;
+                        const selectedHealth = data[index].health_status;
+
+                        window.location.href = `/vessels/?health=${encodeURIComponent(selectedHealth)}`;
+
+                    }
+                },
                 plugins: {
                     legend: {
                         display: true,
@@ -292,8 +301,9 @@ async function loadHealthDistributionChart() {
                         callbacks: {
                             label: function(context) {
                                 const item = data[context.dataIndex];
-
-                                return `${item.health_status}: ${item.count} vessels`;
+                                const total = counts.reduce((a, b) => a + b, 0);
+                                const percentage = ((item.count / total) * 100).toFixed(1);
+                                return `${item.health_status}: ${item.count} vessels (${percentage}%)`;
                             }
                         }
                     }

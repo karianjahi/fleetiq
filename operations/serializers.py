@@ -1,10 +1,24 @@
 from rest_framework import serializers
 from .models import Vessel, Voyage, TelemetryRecord, OperationalAlert
+from .services import services_utils
 
 class VesselSerializer(serializers.ModelSerializer):
+    health_status = serializers.SerializerMethodField()
+    def get_health_status(self, vessel):
+        alerts = OperationalAlert.objects.filter(
+            voyage__vessel = vessel
+        )
+        total_alerts = alerts.count()
+        critical_alerts = alerts.filter(severity=5).count()
+        
+        return services_utils.determine_risk_profile(
+            critical_alerts,
+            total_alerts,
+        )
     class Meta:
         model = Vessel
         fields = "__all__"
+        
 
 class VoyageSerializer(serializers.ModelSerializer):
     class Meta:
