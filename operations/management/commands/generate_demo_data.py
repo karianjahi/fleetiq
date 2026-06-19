@@ -17,6 +17,10 @@ FILEPATH = Path(settings.BASE_DIR)
 
 NO_OF_VESSELS = 15
 
+RISK_PROFILES = ["healthy", "watch", "high_risk"]
+
+PROFILE_WEIGHTS = [0.4, 0.35, 0.25]
+
 PORTS = [
     "Mombasa",
     "Rotterdam",
@@ -48,6 +52,30 @@ class Command(BaseCommand):
     help = "Generate demo vessels, voyages, telemetry records, and alerts."
 
     def handle(self, *args, **kwargs):
+        def get_telemetry_choices(risk_profile):
+            if risk_profile == "healthy":
+                return {
+                    "speed": [8.5, 12.0, 14.2, 15.5],
+                    "fuel": [28, 32, 35, 40, 45],
+                    "engine": [78, 82, 84, 88, 91],
+                    "weather": [0.2, 0.3, 0.4, 0.55, 0.65],
+                }
+
+            if risk_profile == "watch":
+                return {
+                    "speed": [2.5, 8.5, 12.0, 14.2],
+                    "fuel": [28, 32, 45, 58],
+                    "engine": [78, 84, 91, 97],
+                    "weather": [0.2, 0.4, 0.65, 0.78],
+                }
+
+            return {
+                "speed": [2.5, 8.5, 12.0],
+                "fuel": [45, 58, 62],
+                "engine": [97, 108, 110],
+                "weather": [0.78, 0.92],
+            }
+
         vessel_df = pd.read_csv(
             FILEPATH / "operations" / "management" / "commands" / "vessels.csv"
         )
@@ -65,12 +93,20 @@ class Command(BaseCommand):
                 fuel_capacity_tons=row["fuel_capacity_tons"],
                 status=row["status"],
             )
+            risk_profile = random.choices(
+                RISK_PROFILES,
+                weights=PROFILE_WEIGHTS,
+                k=1,
+            )[0]
+            telemetry_choices = get_telemetry_choices(risk_profile)
 
             n_voyages = random.choice(VOYAGES)
             for voyage_index in range(n_voyages):
                 departure_port, destination_port = random.sample(PORTS, 2)
                 departure_time = timezone.now() - timedelta(days=random.randint(5, 90))
-                estimated_arrival = departure_time + timedelta(days=random.randint(7, 30))
+                estimated_arrival = departure_time + timedelta(
+                    days=random.randint(7, 30)
+                )
 
                 voyage = Voyage.objects.create(
                     vessel=vessel,
@@ -92,12 +128,14 @@ class Command(BaseCommand):
                         timestamp=start_time + (telemetry_interval * telemetry_index),
                         latitude=-4.05 + (telemetry_index * 0.15),
                         longitude=39.67 + (telemetry_index * 0.20),
-                        speed_knots=random.choice([2.5, 8.5, 12.0, 14.2]),
+                        speed_knots=random.choice(telemetry_choices["speed"]),
                         fuel_consumption_tons_per_day=random.choice(
-                            [28, 32, 45, 58, 62]
+                            telemetry_choices["fuel"]
                         ),
-                        engine_temperature_celsius=random.choice([78, 84, 91, 97, 108]),
-                        weather_risk_score=random.choice([0.2, 0.4, 0.65, 0.78, 0.92]),
+                        engine_temperature_celsius=random.choice(
+                            telemetry_choices["engine"]
+                        ),
+                        weather_risk_score=random.choice(telemetry_choices["weather"]),
                     )
 
                     generate_alerts_for_telemetry(record)
