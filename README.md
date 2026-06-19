@@ -70,7 +70,6 @@ Supported alert types include:
 * Fuel Anomaly
 * Engine Overheat
 * Weather Warning
-* Route Deviation
 * Speed Anomaly
 
 Operational alerts drive fleet health assessment and machine learning features.
