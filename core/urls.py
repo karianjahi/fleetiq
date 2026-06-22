@@ -21,5 +21,5 @@ from django.shortcuts import redirect
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("operations.urls")),
-    path("", lambda request: redirect("dashboard")),
+    path('', lambda request: redirect("dashboard")),
 ]
