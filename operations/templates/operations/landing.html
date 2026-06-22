@@ -1,0 +1,60 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>FleetIQ</title>
+    <link rel="stylesheet" href="{% static 'operations/css/landing.css' %}">
+</head>
+<body>
+
+    <main class="landing-container">
+        <section class="hero">
+            <h1>FleetIQ</h1>
+            <h2>AI-Powered Fleet Operations and Maritime Intelligence Platform</h2>
+
+            <p>
+                FleetIQ is a full-stack maritime analytics platform for monitoring vessels,
+                analysing telemetry data, generating operational alerts, and preparing
+                machine-learning-based vessel risk predictions.
+            </p>
+
+            <div class="hero-actions">
+                <a href="/dashboard/" class="primary-button">Open Dashboard →</a>
+                <a href="/vessels/" class="secondary-button">View Vessels</a>
+            </div>
+        </section>
+
+        <section class="features-grid">
+            <div class="feature-card">
+                <h3>Operational Dashboard</h3>
+                <p>KPI cards, alert charts, fleet health distribution, and interactive drill-down navigation.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Telemetry & Alerts</h3>
+                <p>Simulated vessel telemetry powers automatic alerts for weather, fuel, speed, delay, and engine risks.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Fleet Health Scoring</h3>
+                <p>Each vessel is classified as Healthy, Watch, or High Risk based on operational alert behaviour.</p>
+            </div>
+
+            <div class="feature-card">
+                <h3>Machine Learning Pipeline</h3>
+                <p>Feature engineering and Random Forest model training prepare FleetIQ for predictive vessel risk analytics.</p>
+            </div>
+        </section>
+
+        <section class="tech-section">
+            <h2>Technology Stack</h2>
+            <p>
+                Django · Django REST Framework · PostgreSQL · pandas · scikit-learn · JavaScript · Chart.js · Railway
+            </p>
+        </section>
+    </main>
+
+</body>
+</html>
