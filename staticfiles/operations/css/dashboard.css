@@ -1,0 +1,191 @@
+/* 
+   Global reset
+   Ensures padding and borders are included in element width calculations.
+*/
+* {
+    box-sizing: border-box;
+}
+
+/* 
+   Base page styling
+   Sets the overall dashboard background, font, and text color.
+*/
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f6f8;
+    color: #1f2933;
+}
+
+/* 
+   Top dashboard header
+   Provides a strong enterprise-style dark header area.
+*/
+.dashboard-header {
+    background: #0f172a;
+    color: white;
+    padding: 24px 40px;
+}
+
+/* Main dashboard title */
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 32px;
+}
+
+/* Subtitle under the main dashboard title */
+.dashboard-header p {
+    margin: 6px 0 0;
+    color: #cbd5e1;
+}
+
+/* 
+   Main content wrapper
+   Controls page spacing around the dashboard sections.
+*/
+.dashboard-container {
+    padding: 30px 40px;
+}
+
+/* 
+   KPI card grid
+   Displays summary cards in a responsive grid layout.
+*/
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+    margin-bottom: 30px;
+}
+
+/* 
+   Individual KPI card
+   Used for metrics such as total vessels, active voyages, and alerts.
+*/
+.kpi-card {
+    background: white;
+    padding: 22px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+/* KPI label, for example "Total Vessels" */
+.kpi-card span {
+    display: block;
+    color: #64748b;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+/* KPI numeric value */
+.kpi-card strong {
+    font-size: 34px;
+}
+
+/* 
+   Critical KPI styling
+   Used for urgent metrics such as critical alerts.
+*/
+.kpi-card.critical {
+    border-left: 6px solid #dc2626;
+}
+
+/* 
+   Warning KPI styling
+   Used for important but less severe metrics such as unresolved alerts.
+*/
+.kpi-card.warning {
+    border-left: 6px solid #f59e0b;
+}
+
+/* 
+   Dashboard content panel
+   Used for tables, charts, and detailed dashboard sections.
+*/
+.panel {
+    background: white;
+    padding: 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+}
+
+/* Panel heading */
+.panel h2 {
+    margin-top: 0;
+}
+
+/* 
+   Table layout
+   Used for latest operational alerts.
+*/
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+/* Table header cells */
+th {
+    text-align: left;
+    background: #f1f5f9;
+    padding: 12px;
+    font-size: 14px;
+}
+
+/* Table body cells */
+td {
+    padding: 12px;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+/* 
+   Tablet responsiveness
+   Reduces KPI grid from 3 columns to 2 columns.
+*/
+@media (max-width: 900px) {
+    .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 
+   Mobile responsiveness
+   Stacks KPI cards vertically and reduces page padding.
+*/
+@media (max-width: 600px) {
+    .kpi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-container {
+        padding: 20px;
+    }
+}
+
+/* 
+   Chart panel spacing
+   Separates visual analytics from KPI cards and tables.
+*/
+.chart-panel {
+    margin-bottom: 30px;
+}
+
+/* 
+   Chart canvas sizing
+   Prevents the chart from becoming too tall on large screens.
+*/
+.chart-panel canvas {
+    max-height: 360px;
+}
+
+.navigation-bar {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+
+.forward-link {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    color: #2563eb;
+}
