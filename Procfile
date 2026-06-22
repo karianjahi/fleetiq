@@ -1,1 +1,1 @@
-web: gunicorn fleetiq.wsgi
+web: gunicorn core.wsgi
