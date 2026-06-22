@@ -189,3 +189,10 @@ td {
     font-weight: 600;
     color: #2563eb;
 }
+
+.back-link {
+    display: inline-block;
+    text-decoration: none;
+    font-weight: 600;
+    color: #2563eb;
+}

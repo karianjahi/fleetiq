@@ -1,263 +1,317 @@
-<section id="home" class="hero section">
-    <div class="hero-text">
-        <p class="eyebrow">Operational Intelligence • Analytics • Machine Learning</p>
-
-```
-    <h1>
-        AI-Powered Fleet Operations and Operational Intelligence
-    </h1>
-
-    <p>
-        FleetIQ helps operators monitor fleet health, detect operational risks,
-        analyse telemetry data, and identify high-risk assets before issues become
-        costly. Built using modern analytics, machine learning, and full-stack
-        engineering principles, FleetIQ transforms operational data into actionable
-        business insights.
-    </p>
-
-    <div class="hero-actions">
-        <a href="/dashboard/" class="btn primary">View Live Dashboard</a>
-        <a href="#features" class="btn secondary">Explore Features</a>
-    </div>
-</div>
-
-<div class="hero-image">
-    <img src="https://media.istockphoto.com/id/2210858896/photo/software-engineer-and-software-development-concepts-programming-for-various-devices-computer.jpg?s=1024x1024&w=is&k=20&c=uEUGnKpvgPOZhSdzF7NkcEgukPg60axR2RibI4m8pNs="
-        alt="Operational Intelligence Platform" />
-</div>
-```
-
-</section>
-
-<section id="about" class="section about">
-
-```
-<div class="section-heading">
-    <p class="eyebrow">Why FleetIQ?</p>
-    <h2>From telemetry data to operational decisions.</h2>
-</div>
-
-<div class="about-card">
+{% load static %}
 
-    <p>
-        Modern operations generate large volumes of telemetry, status updates,
-        alerts, and operational events. However, raw data alone does not help
-        decision-makers understand risk, performance, or operational health.
-    </p>
-
-    <p>
-        FleetIQ provides a centralized operational intelligence platform that
-        transforms telemetry data into meaningful KPIs, operational alerts,
-        fleet health metrics, and predictive analytics.
-    </p>
+<!DOCTYPE html>
+<html lang="en">
 
-    <p>
-        The platform combines Django, PostgreSQL, REST APIs, interactive
-        dashboards, and machine learning workflows to provide visibility
-        across an entire fleet from a single operational view.
-    </p>
-
-</div>
-```
-
-</section>
+<head>
+    <meta charset="UTF-8">
+    <title>FleetIQ</title>
+    <link rel="stylesheet" href="{% static 'operations/css/landing.css' %}">
+</head>
 
-<section id="features" class="section projects">
+<body>
 
-```
-<div class="section-heading">
-    <p class="eyebrow">Core Capabilities</p>
-    <h2>Built to support operational visibility and risk management.</h2>
-</div>
+    <main class="landing-container">
 
-<div class="project-grid">
+        <section id="home" class="hero section">
 
-    <div class="project-card featured">
-        <span class="tag">Fleet Analytics</span>
+            <div class="hero-text">
 
-        <h3>Operational Visibility</h3>
+                <p class="eyebrow">
+                    Operational Intelligence • Analytics • Machine Learning
+                </p>
 
-        <p>
-            Monitor fleet-wide KPIs, vessel health, voyage activity,
-            operational alerts, and performance indicators through a
-            centralized dashboard.
-        </p>
-    </div>
+                <h1>
+                    AI-Powered Fleet Operations and Operational Intelligence
+                </h1>
 
-    <div class="project-card featured">
-        <span class="tag">Alert Engine</span>
+                <p>
+                    FleetIQ helps operators monitor fleet health, detect operational risks,
+                    analyse telemetry data, and identify high-risk assets before issues become
+                    costly.
+                </p>
 
-        <h3>Risk Detection</h3>
+                <p>
+                    Built using modern analytics, machine learning, and full-stack engineering
+                    principles, FleetIQ transforms operational data into actionable business
+                    insights through dashboards, alerting, APIs, and predictive analytics.
+                </p>
 
-        <p>
-            Automatically identify operational risks including engine
-            overheating, fuel anomalies, weather risks, delay risks,
-            and speed anomalies.
-        </p>
-    </div>
+                <div class="hero-actions">
+                    <a href="/dashboard/" class="btn primary">
+                        View Live Dashboard
+                    </a>
 
-    <div class="project-card featured">
-        <span class="tag">Operational Intelligence</span>
+                    <a href="#features" class="btn secondary">
+                        Explore Features
+                    </a>
+                </div>
 
-        <h3>Data-Driven Decisions</h3>
+            </div>
 
-        <p>
-            Transform telemetry records and operational events into
-            actionable insights that help operators prioritize attention
-            and investigate emerging issues.
-        </p>
-    </div>
+            <div class="hero-image">
 
-    <div class="project-card featured">
-        <span class="tag">Machine Learning</span>
+                <img src="https://media.istockphoto.com/id/2210858896/photo/software-engineer-and-software-development-concepts-programming-for-various-devices-computer.jpg?s=1024x1024&w=is&k=20&c=uEUGnKpvgPOZhSdzF7NkcEgukPg60axR2RibI4m8pNs="
+                    alt="FleetIQ Dashboard" />
 
-        <h3>Predictive Risk Analytics</h3>
+            </div>
 
-        <p>
-            Feature engineering pipelines and Random Forest models provide
-            the foundation for future predictive maintenance and vessel
-            risk forecasting capabilities.
-        </p>
-    </div>
+        </section>
 
-</div>
-```
+        <section id="about" class="section about">
 
-</section>
+            <div class="section-heading">
+                <p class="eyebrow">Why FleetIQ?</p>
+                <h2>From telemetry data to operational decisions.</h2>
+            </div>
 
-<section class="section">
+            <div class="about-card">
 
-```
-<div class="section-heading">
-    <p class="eyebrow">Potential Applications</p>
-    <h2>Designed as a reusable operational intelligence platform.</h2>
-</div>
+                <p>
+                    Modern operations generate large volumes of telemetry, status updates,
+                    alerts, and operational events. However, raw data alone does not help
+                    decision-makers understand risk, performance, or operational health.
+                </p>
 
-<div class="project-grid">
+                <p>
+                    FleetIQ provides a centralized operational intelligence platform that
+                    transforms telemetry data into meaningful KPIs, operational alerts,
+                    fleet health metrics, and predictive analytics.
+                </p>
 
-    <div class="project-card">
-        <span class="tag">Maritime Operations</span>
+                <p>
+                    The platform combines Django, PostgreSQL, REST APIs, interactive
+                    dashboards, and machine learning workflows to provide visibility
+                    across an entire fleet from a single operational view.
+                </p>
 
-        <h3>Shipping & Fleet Management</h3>
+            </div>
 
-        <p>
-            Monitor vessel performance, operational risks, fuel consumption,
-            voyage progress, and fleet health.
-        </p>
-    </div>
+        </section>
 
-    <div class="project-card">
-        <span class="tag">Transportation</span>
+        <section id="features" class="section">
 
-        <h3>Logistics Networks</h3>
+            <div class="section-heading">
+                <p class="eyebrow">Core Capabilities</p>
+                <h2>Built to support operational visibility and risk management.</h2>
+            </div>
 
-        <p>
-            Adapt FleetIQ for truck fleets, delivery operations,
-            transportation monitoring, and route performance analytics.
-        </p>
-    </div>
-
-    <div class="project-card">
-        <span class="tag">Industrial Assets</span>
-
-        <h3>Equipment Monitoring</h3>
+            <div class="project-grid">
 
-        <p>
-            Track machine telemetry, maintenance events,
-            operational alerts, and equipment health indicators.
-        </p>
-    </div>
+                <div class="project-card featured">
 
-    <div class="project-card">
-        <span class="tag">IoT Platforms</span>
+                    <span class="tag">Fleet Analytics</span>
 
-        <h3>Connected Devices</h3>
+                    <h3>Operational Visibility</h3>
 
-        <p>
-            Use FleetIQ as an operational analytics layer for
-            sensor networks, connected devices, and industrial IoT systems.
-        </p>
-    </div>
+                    <p>
+                        Monitor fleet-wide KPIs, vessel health, voyage activity,
+                        operational alerts, and performance indicators through a
+                        centralized dashboard.
+                    </p>
 
-</div>
-```
+                </div>
 
-</section>
+                <div class="project-card featured">
 
-<section class="section">
+                    <span class="tag">Alert Engine</span>
 
-```
-<div class="section-heading">
-    <p class="eyebrow">Machine Learning</p>
-    <h2>Preparing operations for predictive intelligence.</h2>
-</div>
+                    <h3>Risk Detection</h3>
 
-<div class="about-card">
+                    <p>
+                        Automatically identify operational risks including engine
+                        overheating, fuel anomalies, weather risks, delay risks,
+                        and speed anomalies.
+                    </p>
 
-    <p>
-        FleetIQ includes a machine learning pipeline that transforms
-        telemetry and operational history into predictive risk models.
-    </p>
+                </div>
 
-    <h3>Current Capabilities</h3>
+                <div class="project-card featured">
 
-    <ul>
-        <li>Feature engineering from operational telemetry</li>
-        <li>Vessel risk classification</li>
-        <li>Random Forest training workflow</li>
-        <li>Operational health scoring</li>
-    </ul>
+                    <span class="tag">Operational Intelligence</span>
 
-    <h3>Future Enhancements</h3>
+                    <h3>Data-Driven Decisions</h3>
 
-    <ul>
-        <li>Predictive maintenance</li>
-        <li>Delay prediction</li>
-        <li>Fuel anomaly prediction</li>
-        <li>Operational risk forecasting</li>
-        <li>AI-generated operational summaries</li>
-    </ul>
+                    <p>
+                        Transform telemetry records and operational events into
+                        actionable insights that help operators prioritize attention
+                        and investigate emerging issues.
+                    </p>
 
-</div>
-```
+                </div>
 
-</section>
+                <div class="project-card featured">
 
-<section class="section">
+                    <span class="tag">Machine Learning</span>
 
-```
-<div class="section-heading">
-    <p class="eyebrow">Architecture</p>
-    <h2>Built using a scalable analytics architecture.</h2>
-</div>
+                    <h3>Predictive Risk Analytics</h3>
 
-<div class="about-card">
-```
+                    <p>
+                        Feature engineering pipelines and Random Forest models provide
+                        the foundation for future predictive maintenance and vessel
+                        risk forecasting capabilities.
+                    </p>
 
-<pre>
-Vessel
-   ↓
-Voyage
-   ↓
-Telemetry
-   ↓
-Alert Engine
-   ↓
-Analytics APIs
-   ↓
-Operational Dashboard
-   ↓
-Machine Learning
-</pre>
+                </div>
 
-```
-    <p>
-        FleetIQ is built with Django, Django REST Framework,
-        PostgreSQL, pandas, scikit-learn, JavaScript, Chart.js,
-        and Railway cloud deployment.
-    </p>
+            </div>
 
-</div>
-```
+        </section>
 
-</section>
+        <section class="section">
+
+            <div class="section-heading">
+                <p class="eyebrow">Potential Applications</p>
+                <h2>Designed as a reusable operational intelligence platform.</h2>
+            </div>
+
+            <div class="project-grid">
+
+                <div class="project-card">
+
+                    <span class="tag">Maritime Operations</span>
+
+                    <h3>Shipping & Fleet Management</h3>
+
+                    <p>
+                        Monitor vessel performance, operational risks, fuel consumption,
+                        voyage progress, and fleet health.
+                    </p>
+
+                </div>
+
+                <div class="project-card">
+
+                    <span class="tag">Transportation</span>
+
+                    <h3>Logistics Networks</h3>
+
+                    <p>
+                        Adapt FleetIQ for truck fleets, delivery operations,
+                        transportation monitoring, and route performance analytics.
+                    </p>
+
+                </div>
+
+                <div class="project-card">
+
+                    <span class="tag">Industrial Assets</span>
+
+                    <h3>Equipment Monitoring</h3>
+
+                    <p>
+                        Track machine telemetry, maintenance events,
+                        operational alerts, and equipment health indicators.
+                    </p>
+
+                </div>
+
+                <div class="project-card">
+
+                    <span class="tag">IoT Platforms</span>
+
+                    <h3>Connected Devices</h3>
+
+                    <p>
+                        Use FleetIQ as an operational analytics layer for
+                        sensor networks, connected devices, and industrial IoT systems.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <div class="section-heading">
+                <p class="eyebrow">Machine Learning</p>
+                <h2>Preparing operations for predictive intelligence.</h2>
+            </div>
+
+            <div class="about-card">
+
+                <p>
+                    FleetIQ includes a machine learning pipeline that transforms
+                    telemetry and operational history into predictive risk models.
+                </p>
+
+                <h3>Current Capabilities</h3>
+
+                <ul>
+                    <li>Feature engineering from operational telemetry</li>
+                    <li>Vessel risk classification</li>
+                    <li>Random Forest training workflow</li>
+                    <li>Operational health scoring</li>
+                </ul>
+
+                <h3>Future Enhancements</h3>
+
+                <ul>
+                    <li>Predictive maintenance</li>
+                    <li>Delay prediction</li>
+                    <li>Fuel anomaly prediction</li>
+                    <li>Operational risk forecasting</li>
+                    <li>AI-generated operational summaries</li>
+                </ul>
+
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <div class="section-heading">
+                <p class="eyebrow">Architecture</p>
+                <h2>Built using a scalable analytics architecture.</h2>
+            </div>
+
+            <div class="about-card">
+                <p>
+                    FleetIQ is built with Django, Django REST Framework,
+                    PostgreSQL, pandas, scikit-learn, JavaScript, Chart.js,
+                    and Railway cloud deployment.
+                </p>
+
+            </div>
+
+        </section>
+
+        <section class="section">
+
+            <div class="section-heading">
+                <p class="eyebrow">Technology Stack</p>
+                <h2>Modern technologies powering FleetIQ.</h2>
+            </div>
+
+            <div class="project-grid">
+
+                <div class="project-card">
+                    <h3>Backend</h3>
+                    <p>Python, Django, Django REST Framework, REST APIs</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Data & Analytics</h3>
+                    <p>PostgreSQL, pandas, scikit-learn, Machine Learning</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Frontend</h3>
+                    <p>JavaScript, HTML, CSS, Chart.js</p>
+                </div>
+
+                <div class="project-card">
+                    <h3>Deployment</h3>
+                    <p>Railway, Gunicorn, WhiteNoise, Production Django</p>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+</body>
+
+</html>
