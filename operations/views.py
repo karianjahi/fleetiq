@@ -38,6 +38,8 @@ class VesselVoyageListAPIView(ListAPIView):
 def dashboard_view(request):
     return render(request, "operations/dashboard.html")
 
+def landing_page(request):
+    return render(request, "operations/landing.html")
 
 @api_view(["GET"])
 def dashboard_kpis(request):
