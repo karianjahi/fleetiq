@@ -2,12 +2,14 @@
 
 <div align="center">
 
-# AI-Powered Fleet Operations, Predictive Analytics and Maritime Intelligence Platform
+# AI-Powered Fleet Operations and Operational Intelligence Platform
+
+Monitor fleet health, detect operational risks, analyse telemetry data, and prepare for predictive maintenance through machine learning.
 
 ![Python](https://img.shields.io/badge/Python-3.12-blue?style=for-the-badge\&logo=python)
 ![Django](https://img.shields.io/badge/Django-5.x-darkgreen?style=for-the-badge\&logo=django)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?style=for-the-badge\&logo=postgresql)
-![Django REST Framework](https://img.shields.io/badge/DRF-Django%20REST%20Framework-red?style=for-the-badge)
+![DRF](https://img.shields.io/badge/DRF-Django%20REST%20Framework-red?style=for-the-badge)
 ![JavaScript](https://img.shields.io/badge/JavaScript-ES6-yellow?style=for-the-badge\&logo=javascript)
 ![Chart.js](https://img.shields.io/badge/Chart.js-Analytics-orange?style=for-the-badge\&logo=chartdotjs)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-Machine%20Learning-orange?style=for-the-badge\&logo=scikitlearn)
@@ -16,231 +18,263 @@
 
 ---
 
+# 🌐 Live Demo
+
+**Application:** https://fleetiq-maritime.up.railway.app
+
+Key Areas:
+
+* Landing Page
+* Fleet Analytics Dashboard
+* Vessel Operations Portal
+* Fleet Health Monitoring
+* Operational Alerts
+* Machine Learning Foundation
+
+---
+
 # 📖 Overview
 
-FleetIQ is an enterprise-style maritime operations platform that combines operational analytics, telemetry monitoring and machine learning to provide intelligent fleet monitoring and operational decision support.
+FleetIQ is a cloud-deployed operational intelligence platform designed to help operators monitor fleet performance, detect operational risks, analyse telemetry data, and support data-driven decision making.
 
-The system simulates a realistic fleet operations centre capable of monitoring vessel performance, generating operational alerts, assessing fleet health and laying the foundation for predictive analytics using machine learning.
+The platform demonstrates how modern operational systems transform raw telemetry into actionable business intelligence through dashboards, REST APIs, alerting systems, fleet health analytics, and machine learning.
 
-FleetIQ demonstrates:
+FleetIQ combines:
 
-* Backend software engineering
-* Full-stack web development
-* REST API development
-* Operational analytics
-* Dashboard engineering
-* Machine learning integration
+* Fleet Operations Management
+* Operational Intelligence
+* Telemetry Analytics
+* Machine Learning
+* Cloud Deployment
+* Interactive Dashboards
+
+into a single enterprise-style application.
+
+---
+
+# 🎯 Project Goals
+
+FleetIQ was created to demonstrate the integration of:
+
+* Software Engineering
+* Backend Development
+* Operational Analytics
+* Machine Learning
+* Cloud Deployment
+
+within a realistic enterprise-style platform.
+
+The architecture intentionally mirrors systems used in:
+
+* Maritime Operations
+* Logistics Platforms
+* Fleet Management Systems
+* Industrial Monitoring
+* IoT Analytics Platforms
+
+---
+
+# 🚀 Current Capabilities
+
+* 14+ REST API endpoints
+* Fleet health scoring
+* Vessel operational analytics
+* Interactive dashboard
+* Telemetry simulation engine
+* Operational alert engine
+* Machine learning pipeline
+* PostgreSQL backend
+* Railway deployment
 * Synthetic data generation
 
 ---
 
 # ✨ Features
 
-## 🚢 Fleet Management
+## 🚢 Fleet Operations
 
 * Vessel management
 * Voyage management
-* Fleet operational status tracking
+* Fleet status monitoring
 * Vessel health scoring
 * Fleet health distribution
 * Vessel operational dashboards
 
----
+## 📡 Telemetry Analytics
 
-## 📡 Telemetry Monitoring
-
-FleetIQ generates realistic vessel telemetry including:
+Generated telemetry includes:
 
 * Vessel speed
 * Fuel consumption
 * Engine temperature
 * Weather risk score
-* Time-series operational measurements
+* Time-series measurements
 
-Telemetry generation supports configurable operational risk profiles.
-
----
+Telemetry generation supports configurable risk profiles including healthy, watch, and high-risk operational scenarios.
 
 ## 🚨 Operational Alert Engine
 
-FleetIQ automatically generates operational alerts from telemetry analysis.
+Automatically generated alerts include:
 
-Supported alert types include:
-
-* Delay Risk
-* Fuel Anomaly
 * Engine Overheat
+* Fuel Anomaly
 * Weather Warning
+* Delay Risk
 * Speed Anomaly
 
-Alerts drive fleet health assessment and machine learning feature generation.
+These alerts drive fleet health assessment and machine learning feature generation.
 
----
-
-# 🖥️ Application Pages
-
-| Page             | Description                  |
-| ---------------- | ---------------------------- |
-| `/dashboard/`    | Fleet analytics dashboard    |
-| `/vessels/`      | Fleet vessel listing         |
-| `/vessels/<id>/` | Vessel operational dashboard |
-
----
-
-# 🌐 REST APIs
-
-| Endpoint                                      | Description                  |
-| --------------------------------------------- | ---------------------------- |
-| `/api/dashboard/kpis/`                        | Dashboard KPIs               |
-| `/api/alerts/latest/`                         | Latest operational alerts    |
-| `/api/alerts/summary-by-type/`                | Alert type distribution      |
-| `/api/alerts/summary-by-severity/`            | Alert severity distribution  |
-| `/api/alerts/over-time/`                      | Alert evolution over time    |
-| `/api/alerts/top-vessels/`                    | Alert distribution by vessel |
-| `/api/voyages/status-summary/`                | Voyage status summary        |
-| `/api/vessels/`                               | Fleet vessel list            |
-| `/api/vessels/<int:pk>/`                      | Vessel details               |
-| `/api/vessels/<int:vessel_id>/voyages/`       | Vessel voyages               |
-| `/api/vessels/<int:vessel_id>/alerts/`        | Vessel alerts                |
-| `/api/vessels/<int:vessel_id>/kpis/`          | Vessel operational KPIs      |
-| `/api/vessels/<int:vessel_id>/health-status/` | Vessel health status         |
-| `/api/fleet/health-distribution/`             | Fleet health distribution    |
-
----
-
-# 📊 Interactive Dashboard
-
-FleetIQ provides a modern operational dashboard featuring:
+## 📊 Interactive Analytics Dashboard
 
 * KPI cards
-* Latest operational alerts
-* Fleet Health Distribution
-* Alert Type Distribution
-* Alert Severity Distribution
-* Alert Time Evolution
-* Alerts by Vessel
+* Fleet health analytics
+* Latest alerts
+* Alert severity distribution
+* Alert type distribution
+* Alert trends over time
+* Top vessels by alerts
 * Interactive drill-down navigation
-* Responsive frontend
-
-Dashboard charts support drill-down navigation into filtered vessel views.
-
----
-
-# 🚢 Vessel Operations Portal
-
-Each vessel includes a dedicated operational page containing:
-
-* Vessel information
-* Operational KPIs
-* Fleet health status
-* Voyage history
-* Operational alerts
-* Alert pagination
-* Alert sorting
-* Alert filtering
-
----
-
-# 🤖 Machine Learning
-
-FleetIQ includes an initial machine learning pipeline for vessel risk prediction.
-
-Current capabilities include:
-
-* Feature engineering
-* Vessel-level feature dataset generation
-* Random Forest model training
-* Train/Test split
-* Model persistence using Joblib
-
-The ML pipeline forms the foundation for predictive operational analytics.
 
 ---
 
 # 🏗️ System Architecture
 
+```mermaid
+flowchart TD
+
+A[Vessel]
+--> B[Voyage]
+
+B --> C[TelemetryRecord]
+
+C --> D[Operational Alert Engine]
+
+D --> E[Operational Alerts]
+
+E --> F[Analytics APIs]
+
+F --> G[Fleet Dashboard]
+
+G --> H[Machine Learning]
+```
+
+---
+
+# 🤖 Machine Learning Pipeline
+
+FleetIQ contains a machine learning workflow for vessel risk assessment.
+
+Current implementation:
+
 ```text
-Vessel
-    ↓
-Voyage
-    ↓
-TelemetryRecord
-    ↓
-OperationalAlert
-    ↓
+Telemetry Records
+        ↓
 Feature Engineering
-    ↓
-Machine Learning
-    ↓
-REST APIs
-    ↓
-Interactive Dashboard
+        ↓
+Vessel Feature Dataset
+        ↓
+Risk Label Generation
+        ↓
+Random Forest Training
+        ↓
+Model Persistence
 ```
 
----
+Current capabilities:
 
-# 🧠 Core Models
+* Feature engineering
+* Vessel-level dataset generation
+* Train/test split
+* Random Forest training
+* Model persistence using Joblib
 
-## Vessel
+Current features:
 
-* Name
-* IMO Number
-* Vessel Type
-* Capacity
-* Fuel Capacity
-* Operational Status
+* Average speed
+* Average engine temperature
+* Average weather risk
+* Average fuel consumption
+* Total alerts
 
----
+Future enhancements:
 
-## Voyage
-
-* Departure Port
-* Destination Port
-* Departure Time
-* Estimated Arrival
-* Voyage Status
-
----
-
-## TelemetryRecord
-
-* Timestamp
-* Latitude
-* Longitude
-* Speed
-* Fuel Consumption
-* Engine Temperature
-* Weather Risk Score
+* Predictive maintenance
+* ETA prediction
+* Fuel anomaly prediction
+* Vessel risk forecasting
 
 ---
 
-## OperationalAlert
+# 🚢 Vessel Operations Portal
 
-* Alert Type
-* Severity
-* Message
-* Timestamp
-* Voyage
-* Telemetry Traceability
+Each vessel includes a dedicated operational dashboard containing:
+
+* Vessel information
+* Operational KPIs
+* Health score
+* Voyage history
+* Alert history
+* Alert filtering
+* Alert sorting
+* Alert pagination
 
 ---
 
-# ⚙️ Operational Alert Engine
+# 🌐 REST APIs
 
-FleetIQ contains a dedicated operational alert engine located in:
+## Dashboard APIs
+
+| Endpoint                           | Description                 |
+| ---------------------------------- | --------------------------- |
+| `/api/dashboard/kpis/`             | Dashboard KPIs              |
+| `/api/alerts/latest/`              | Latest alerts               |
+| `/api/alerts/summary-by-type/`     | Alert type distribution     |
+| `/api/alerts/summary-by-severity/` | Alert severity distribution |
+| `/api/alerts/over-time/`           | Alert trends                |
+| `/api/alerts/top-vessels/`         | Top vessels by alerts       |
+| `/api/voyages/status-summary/`     | Voyage status summary       |
+
+## Vessel APIs
+
+| Endpoint                           | Description    |
+| ---------------------------------- | -------------- |
+| `/api/vessels/`                    | Vessel list    |
+| `/api/vessels/<id>/`               | Vessel details |
+| `/api/vessels/<id>/voyages/`       | Vessel voyages |
+| `/api/vessels/<id>/alerts/`        | Vessel alerts  |
+| `/api/vessels/<id>/kpis/`          | Vessel KPIs    |
+| `/api/vessels/<id>/health-status/` | Vessel health  |
+
+## Fleet APIs
+
+| Endpoint                          | Description               |
+| --------------------------------- | ------------------------- |
+| `/api/fleet/health-distribution/` | Fleet health distribution |
+
+---
+
+# ☁️ Deployment Architecture
+
+FleetIQ is deployed using Railway.
 
 ```text
-operations/services/alert_engine.py
+GitHub
+   ↓
+Railway
+   ↓
+PostgreSQL
+   ↓
+Production Application
 ```
 
-The engine analyses telemetry measurements and automatically generates operational alerts.
+Production stack:
 
-Example:
-
-```python
-if record.engine_temperature_celsius >= 95:
-    create_engine_overheat_alert()
-```
+* Railway
+* PostgreSQL
+* Gunicorn
+* WhiteNoise
+* Environment Variables
+* Production Django Configuration
 
 ---
 
@@ -250,27 +284,27 @@ if record.engine_temperature_celsius >= 95:
 fleetiq/
 
 ├── core/
-
+│
 ├── operations/
+│   ├── models.py
+│   ├── serializers.py
+│   ├── views.py
+│   ├── urls.py
+│   │
+│   ├── services/
+│   │   ├── alert_engine.py
+│   │   ├── services_utils.py
+│   │   └── ml_features.py
+│   │
+│   ├── management/
+│   │   └── commands/
+│   │
+│   ├── templates/
+│   └── static/
 │
-├── models.py
-├── serializers.py
-├── views.py
-├── urls.py
-│
-├── services/
-│   ├── alert_engine.py
-│   ├── services_utils.py
-│   └── ml_features.py
-│
-├── management/
-│   └── commands/
-│
-├── templates/
-└── static/
-
-manage.py
-requirements.txt
+├── requirements.txt
+├── manage.py
+└── README.md
 ```
 
 ---
@@ -282,17 +316,17 @@ requirements.txt
 * Python
 * Django
 * Django REST Framework
-* PostgreSQL
 
----
+## Database
+
+* PostgreSQL
 
 ## Analytics & Machine Learning
 
 * pandas
 * NumPy
 * scikit-learn
-
----
+* joblib
 
 ## Frontend
 
@@ -300,6 +334,12 @@ requirements.txt
 * CSS
 * JavaScript
 * Chart.js
+
+## Deployment
+
+* Railway
+* Gunicorn
+* WhiteNoise
 
 ---
 
@@ -325,9 +365,9 @@ python manage.py runserver
 
 ---
 
-# 🧪 Demo Data Generation
+# 🧪 Generate Demo Data
 
-Generate synthetic operational data:
+Generate synthetic fleet data:
 
 ```bash
 python manage.py generate_demo_data
@@ -335,96 +375,66 @@ python manage.py generate_demo_data
 
 Generated data includes:
 
-* 🚢 Vessels
-* 🌍 Voyages
-* 📡 Telemetry
-* 🚨 Operational Alerts
-* 📊 Fleet Health Profiles
+* Vessels
+* Voyages
+* Telemetry Records
+* Operational Alerts
+* Fleet Health Profiles
 
-Telemetry is generated using configurable Healthy, Watch and High Risk operational profiles, producing realistic datasets for analytics and machine learning experiments.
-
----
-
-# 📈 Development Progress
-
-## ✅ Completed
-
-* Django backend
-* PostgreSQL integration
-* Operational models
-* Telemetry generation
-* Operational alert engine
-* REST APIs
-* Interactive dashboard
-* Fleet health scoring
-* Vessel detail pages
-* Alert pagination
-* Alert sorting
-* Alert filtering
-* Interactive chart drill-down
-* Machine learning feature engineering
-* Random Forest training pipeline
+The synthetic data engine produces realistic operational scenarios for analytics and machine learning experimentation.
 
 ---
 
-## 🚧 In Progress
+# 🚀 Roadmap
 
-* Model evaluation
-* Prediction APIs
-* Vessel risk prediction interface
-* Dashboard AI integration
+## Current Release
 
----
+✓ Fleet Analytics
 
-## 🔮 Planned Features
+✓ Vessel Analytics
 
-### Machine Learning
+✓ Fleet Health Monitoring
 
-* Predictive maintenance
-* Vessel risk prediction
-* ETA prediction
-* Fuel anomaly prediction
-* Remaining useful life estimation
+✓ Operational Alert Engine
 
----
+✓ Machine Learning Pipeline
 
-### AI
+✓ Railway Deployment
 
-* AI operational summaries
-* Intelligent anomaly explanations
-* Natural language fleet queries
-* Operational recommendations
+## Next Release
 
----
+□ Model Evaluation Metrics
 
-### Dashboard
+□ Prediction APIs
 
-* Fleet map visualisation
-* Predictive dashboards
-* Fleet comparison analytics
-* Operational reporting exports
+□ Vessel Risk Prediction Dashboard
 
----
+## Future Releases
 
-### Infrastructure
+□ Predictive Maintenance
 
-* Docker deployment
-* Real-time telemetry streaming
-* Cloud deployment
-* CI/CD pipelines
-* Scalable analytics infrastructure
+□ ETA Prediction
+
+□ AI Operational Summaries
+
+□ Natural Language Fleet Queries
+
+□ Operational Recommendations
+
+□ Real-Time Telemetry Streaming
 
 ---
 
-# 🧭 Development Philosophy
+# 📚 Documentation
 
-FleetIQ is intentionally designed as:
+Available documentation:
 
-* A realistic maritime operations platform
-* A backend engineering showcase
-* An operational analytics platform
-* A machine learning portfolio project
-* A foundation for AI-driven maritime decision support systems
+* Software Architecture Document
+* Technical Design Document
+* Deployment Architecture
+* API Reference
+
+Documentation is available in the `/docs` directory.
 
 ---
 
@@ -445,6 +455,6 @@ FleetIQ is intentionally designed as:
 
 # 🚢 FleetIQ
 
-### Intelligent Fleet Operations, Predictive Analytics and Maritime Intelligence
+### Intelligent Fleet Operations, Operational Analytics, and Machine Learning
 
 </div>
