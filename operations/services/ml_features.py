@@ -47,7 +47,7 @@ def build_vessel_feature_dataset():
 
 def train_vessel_risk_model():
     df = build_vessel_feature_dataset()
-
+    df = df.fillna(0)
     X = df.drop(columns=["vessel_id", "high_risk", "critical_alerts"])
     y = df["high_risk"]
     X_train, X_test, y_train, y_test = train_test_split(
